@@ -77,3 +77,6 @@
 ### 메인 게임 루프
 - 모듈 간 상호작용 관리
 - 프레임 렌더링 및 타이밍 제어
+
+## 참조
+https://github.com/365kim/raycasting_tutorial
