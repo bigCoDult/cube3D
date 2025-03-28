@@ -52,6 +52,8 @@ SRC = \
       ./ft_lstclear.c \
       ./ft_lstiter.c \
       ./ft_lstmap.c \
+	  ./template_literal.c \
+	  ./file_to_str.c \
       
 #보너스를 위한 룰이 따로 있어야 함
 OBJ = $(SRC:.c=.o)
