@@ -1,67 +1,57 @@
 #include "../../inc/cub3d.h"
 // #include <cub3d.h>
 
-char	*join_s_till_c(char *s1, char *s2, char c)
+
+static int	count_space(char *str)
 {
-	char	*out_s;
-	int		i_in_s1;
-	int		i_in_s2;
-	int		i_out;
+	int	i;
 
-	i_in_s1 = 0;
-	i_in_s2 = 0;
-	i_out = 0;
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	out_s = (char *)malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
-	if (out_s == NULL)
-		return (NULL);
-	while (s1 && s1[i_in_s1] != c)
-		out_s[i_out++] = s1[i_in_s1++];
-	while (s2 && s2[i_in_s2] != c)
-		out_s[i_out++] = s2[i_in_s2++];
-	out_s[i_out] = '\0';
-	return (out_s);
-}
-
-char	*join_s(char *st_s, char *buf)
-{
-	char	*new_line;
-
-	new_line = join_s_till_c(st_s, buf, '\0');
-	if (new_line == NULL)
-		return (NULL);
-	free(st_s);
-	return (new_line);
-}
-
-char *file_to_str(int fd)
-{
-	char	buf[6];
-	int		read_return;
-	int		index;
-	char	*result;
-	read_return = 5;
-	index = 0;
-	result = malloc(sizeof(char) * 1);
-	if (result == NULL)
-		return (NULL);
-	result[0] = '\0';
-	while (read_return == 5)
-	{
-		read_return = read(fd, buf, 5);
-		buf[read_return] = '\0';
-		result = join_s(result, buf);
-	}
-	return (result);
-}
-
-
-char *get_key_value(const char *key, char *file)
-{
-	int i;
 	i = 0;
-	ft_strcmp(file, key)
+	while (str[i] && is_space(str[i]))
+		i++;
+	if (str[i] == '\0')
+		return (-1);
+	return (i);
+}
+
+int find_i_key(char *file, const char *key)
+{
+	int	i;
+	int	k;
+
+	i = 0;
+	while (file[i])
+	{
+		k = 0;
+		while (key[k] && key[k] == file[i + k])
+			k++;
+		if (key[k] == '\0')
+			return (i);
+		i++;
+	}
+	return (-1);
+}
+
+char *extract_value(const char *key, char *file)
+{
+	int	i_key;
+	int	i_start;
+	int	i_end;
+
+	i_key = 0;
+	i_key = find_i_key(file, key);
+	if (i_key == -1 \
+		|| (i_key != 0 && (!is_space(file[i_key - 1]))) \
+		|| !is_space(file[i_key + ft_strlen(key)]))
+		return (NULL);
+	i_start = i_key + ft_strlen(key);
+	if(count_space(file + i_key + ft_strlen(key)) == 0 || count_space(file + i_key + ft_strlen(key)) == -1)
+		return (NULL);
+	i_start += count_space(file + i_key + ft_strlen(key));
+	i_end = i_start;
+	while (file[i_end] && !is_space(file[i_end]))
+		i_end++;
+	return (ft_strndup(file + i_start, i_end - i_start));
 }
 
 
@@ -76,23 +66,40 @@ int main(void)
 {
 	t_total *total;
 	total = (t_total *)ft_calloc(sizeof(t_total), 1);
+	total->parsed = malloc(sizeof(t_parsed));
+	total->parsed->extracted_str = malloc(sizeof(t_extracted_str));
 	int fd = open("../../img/map.cub", O_RDONLY);
 	char *file = file_to_str(fd);
-	char *north_path = get_key_value("NO", file);
-	char *south_path = get_key_value("SO", file);
-	char *west_path = get_key_value("WE", file);
-	char *east_path = get_key_value("EA", file);
-	char *floor_color = get_key_value("F", file);
-	char *ceiling_color = get_key_value("C", file);
+	total->parsed->extracted_str->north = extract_value("NO", file);
+	total->parsed->extracted_str->south = extract_value("SO", file);
+	total->parsed->extracted_str->west = extract_value("WE", file);
+	total->parsed->extracted_str->east = extract_value("EA", file);
+	total->parsed->extracted_str->floor = extract_value("F", file);
+	total->parsed->extracted_str->ceiling = extract_value("C", file);
+	
+	// printf("%s\n\n\n", file);
+
+
+	printf("north: %s\n", total->parsed->extracted_str->north);
+	printf("south: %s\n", total->parsed->extracted_str->south);
+	printf("west: %s\n", total->parsed->extracted_str->west);
+	printf("east: %s\n", total->parsed->extracted_str->east);
+	printf("floor: %s\n", total->parsed->extracted_str->floor);
+	printf("ceiling: %s\n", total->parsed->extracted_str->ceiling);
 	
 	
 	
 	
-	
-	
-	
-	printf("%s\n", file);
 	free(file);
+	free(total->parsed->extracted_str->north);
+	free(total->parsed->extracted_str->south);
+	free(total->parsed->extracted_str->west);
+	free(total->parsed->extracted_str->east);
+	free(total->parsed->extracted_str->floor);
+	free(total->parsed->extracted_str->ceiling);
+	free(total->parsed->extracted_str);
+	free(total->parsed);
+	free(total);
 	close(fd);
 	return (0);
 }
