@@ -97,7 +97,6 @@ int		ft_printfstr_fd(char *s, int fd);
 int		ft_printfll_fd(long long int n, int fd);
 int		ft_printfhex_fd(int islower, long long unsigned int n, int fd);
 char	**ft_split(char const *str, char separator);
-int		ft_isspace(char c);
 int		ft_atoi(char *str);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstnew(void *content);
@@ -108,5 +107,7 @@ void	ft_lstdelone(t_list *lst, void (*del)(void*));
 void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+char	*file_to_str(int fd);
+int		is_space(char c);
 
 #endif /* LIBFT_H */
