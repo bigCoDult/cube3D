@@ -30,3 +30,21 @@ char	*ft_strdup(const char *src)
 	}
 	return (dup_src);
 }
+
+char	*ft_strndup(const char *src, int n)
+{
+	char	*dup_src;
+	int		i;
+
+	dup_src = (char *)ft_calloc(n + 1, sizeof(char));
+	if (dup_src == NULL)
+		return (NULL);
+	i = 0;
+	while (i < n)
+	{
+		dup_src[i] = (char)src[i];
+		i++;
+	}
+	dup_src[i] = '\0';
+	return (dup_src);
+}
