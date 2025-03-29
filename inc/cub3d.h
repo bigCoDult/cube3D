@@ -51,15 +51,26 @@ typedef struct s_parsed
 	t_image_info *image_info;
 	t_extracted_str *extracted_str;
 	char **map; // {' ', 1, 0, P}로 구성된 맵
-	t_cordi *rowcol_range; // 맵의 가로세로 길이
 	t_cordi *player; // 플레이어의 위치
 	int direction; // 플레이어가 바라보고 있는 방향 = 게임을 시작했을때 보여야 하는 타일
 } t_parsed;
 
+typedef struct s_mlx
+{
+	void *mlx_ptr;
+	void *win_ptr;
+} t_mlx;
+
 typedef struct s_total // minishell에서의 t_shell과 같음
 {
 	t_parsed *parsed;
+	t_mlx *mlx;
 	// 필요한것 추가 바랍니다
 } t_total;
+
+int		extract_str(int fd, t_total *total);
+void	extract_map(char *file, t_total *total);
+void	extract_img(t_total *total);
+
 
 #endif /* CUB3D_H */
