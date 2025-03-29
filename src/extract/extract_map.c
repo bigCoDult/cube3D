@@ -76,6 +76,7 @@ void	extract_map(char *file, t_total *total)
 	col = 0;
 	i = find_map_start(file, i);
 	set_rowcol(file, i, &row, &col);
+	malloc_map(total, row, col);
 	row = 0;
 	col = 0;
 	while (file[i] != '\0')
