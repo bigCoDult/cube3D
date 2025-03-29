@@ -1,5 +1,7 @@
 #include "../../inc/cub3d.h"
 
+// cc -g dummy_main.c extract_map.c extract_str.c extract_img.c ../../libft/libft.a ../../minilibx-linux/libmlx_Linux.a -lX11 -lXext -lXrandr
+// make 대신 사용한 임시 컴파일 명령어
 int	main(void)
 {
 	t_total	*total;
@@ -37,6 +39,17 @@ int	main(void)
 		col++;
 	}
 	printf("------------map end------------\n");
+	
+	
+	total->mlx = malloc(sizeof(t_mlx));
+	total->mlx->mlx_ptr = mlx_init();
+	total->mlx->win_ptr = mlx_new_window(total->mlx->mlx_ptr, 1000, 500, "pokemon mountain");
+	extract_img(total);
+	mlx_put_image_to_window(total->mlx->mlx_ptr, total->mlx->win_ptr, total->parsed->image_info->north, 0, 0);
+	mlx_put_image_to_window(total->mlx->mlx_ptr, total->mlx->win_ptr, total->parsed->image_info->south, 64, 0);
+	mlx_put_image_to_window(total->mlx->mlx_ptr, total->mlx->win_ptr, total->parsed->image_info->west, 0, 64);
+	mlx_put_image_to_window(total->mlx->mlx_ptr, total->mlx->win_ptr, total->parsed->image_info->east, 64, 64);
+	mlx_loop(total->mlx->mlx_ptr);
 	col = 0;
 	while (total->parsed->map[col] != NULL)
 	{
