@@ -6,7 +6,7 @@ static int	count_space(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] && is_space(str[i]))
+	while (str[i] && (str[i]) == ' ')
 		i++;
 	if (str[i] == '\0')
 		return (-1);
@@ -82,6 +82,8 @@ static int	extract_str(int fd, t_total *total)
 		if (total->parsed->extracted_str->ceiling)
 			free(total->parsed->extracted_str->ceiling);
 		free(total->parsed->extracted_str);
+		free(file);
+		return (-1);
 	}
 	free(file);
 	return (0);
@@ -96,7 +98,14 @@ int	main(void)
 	total = (t_total *)ft_calloc(sizeof(t_total), 1);
 	total->parsed = malloc(sizeof(t_parsed));
 	total->parsed->extracted_str = malloc(sizeof(t_extracted_str));
-	extract_str(fd, total);
+	if (extract_str(fd, total) == -1)
+	{
+		// free(total->parsed->extracted_str);
+		free(total->parsed);
+		free(total);
+		close(fd);
+		return (-1);
+	}
 	printf("north: %s\n", total->parsed->extracted_str->north);
 	printf("south: %s\n", total->parsed->extracted_str->south);
 	printf("west: %s\n", total->parsed->extracted_str->west);
