@@ -26,21 +26,33 @@ typedef enum e_direction
 	WEST = 3
 }	t_direction;
 
-typedef struct s_image_info
+typedef struct s_extracted_str
 {
-	char *ceiling; /* "숫자,숫자,숫자" 이 형태의 문자열*/
-	char *floor;
 	char *north; /* 파일 경로*/
 	char *south;
 	char *east;
 	char *west;
+	char *ceiling; /* "숫자,숫자,숫자" 이 형태의 문자열*/
+	char *floor;
+} t_extracted_str;
+
+typedef struct s_image_info
+{
+	void *north; /* xpm 이미지 */
+	void *south;
+	void *east;
+	void *west;
+	char *ceiling; /* "숫자,숫자,숫자" 이 형태의 문자열*/
+	char *floor;
 } t_image_info;
 
 typedef struct s_parsed
 {
-	t_image_info image_info;
-	char **map;
-	t_cordi *player;
+	t_image_info *image_info;
+	t_extracted_str *extracted_str;
+	char **map; // {' ', 1, 0, P}로 구성된 맵
+	t_cordi *rowcol_range; // 맵의 가로세로 길이
+	t_cordi *player; // 플레이어의 위치
 	int direction; // 플레이어가 바라보고 있는 방향 = 게임을 시작했을때 보여야 하는 타일
 } t_parsed;
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sanbaei <sanbaei@student.42gyeongsan.ir    +#+  +:+       +#+        */
+/*   By: sanbaek <sanbaei@student.42gyeongsan.ir    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/27 22:38:53 by sanbaei           #+#    #+#             */
-/*   Updated: 2024/03/27 22:38:53 by sanbaei          ###   ########.fr       */
+/*   Created: 2024/03/27 22:38:53 by sanbaek           #+#    #+#             */
+/*   Updated: 2024/03/27 22:38:53 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
