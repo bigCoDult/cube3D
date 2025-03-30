@@ -11,6 +11,65 @@
 # include <unistd.h>
 # include <stdarg.h>
 # include <stdlib.h>
+#include <math.h>
+
+typedef struct s_ray
+{
+    // 플레이어 위치 좌표
+    double posX;
+    double posY;
+    // 맵 상 좌표
+    int    mapX;
+    int    mapY;
+    // 플레이어의 방향 벡터
+    double dirX;
+    double dirY;
+    // 광선 방향 벡터 : 광선이 바라보는 방향
+    double rayDirX;
+    double rayDirY;
+    // 카메라 평면 벡터 : 플레이어 시야폭
+    double planeX;
+    double planeY;
+    // 카메라 x좌표 : 정규화된, 화면x좌표
+    double cameraX;
+    // 현재 위치로부터 다음 X면 혹은 Y면까지의 광선의 길이
+    double sideDistX;
+    double sideDistY;
+    // 어느 한 X면 혹은 Y면으로부터 다음 X 혹은 Y면까지의 광선의 길이
+    double deltaDistX;
+    double deltaDistY;
+    // 카메라 평면까지의 수직거리
+    double perpWallDist;
+    // X 혹은 Y 방향으로의 진행
+    int    stepX;
+    int    stepY;
+    // 벽 도달 여부
+    int    hit;
+    // X축 벽인지 Y축 벽인지 여부
+    int    side;
+    // 스크린 가로 크기
+    int    screenWidth;
+    int    screenHeight;
+    // 스크린 가로상 위치
+    int    screenX;
+    // 벽 그리기 시작과 끝 지점
+    int    drawStart;
+    int    drawEnd;
+    // 벽 높이
+    int    lineHeight;
+    // 텍스처 정보
+    // 벽 방향 0:북 1:남 2:서 3:동
+    int    texNum;
+    // 충돌지점
+    double wallX;
+    // 텍스처 내부 좌표
+    int    texX;
+    int    texY;
+    // 텍스처 매핑 비율
+    double step;
+    // 텍스처 매핑 위치
+    double texPos;
+}   t_ray;
 
 typedef struct s_cordi
 {
@@ -65,6 +124,7 @@ typedef struct s_total // minishell에서의 t_shell과 같음
 {
 	t_parsed *parsed;
 	t_mlx *mlx;
+	t_ray *ray;
 	// 필요한것 추가 바랍니다
 } t_total;
 
