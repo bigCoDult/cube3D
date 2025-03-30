@@ -76,6 +76,7 @@ static int	free_fail(char *file, t_extracted_str *extracted_str)
 		free(file);
 		return (-1);
 	}
+	return (0);
 }
 
 int	extract_str(int fd, t_total *total)

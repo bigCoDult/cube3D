@@ -50,11 +50,11 @@ char	*file_to_str(int fd)
 {
 	char	buf[6];
 	int		read_return;
-	int		index;
+	// int		index;
 	char	*result;
 
 	read_return = 5;
-	index = 0;
+	// index = 0;
 	result = malloc(sizeof(char) * 1);
 	if (result == NULL)
 		return (NULL);
