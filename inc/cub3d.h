@@ -69,6 +69,16 @@ typedef struct s_ray
     double step;
     // 텍스처 매핑 위치
     double texPos;
+    // 이미지 정보
+    void   *img;
+    int    *data;
+    int    bpp;
+    int    size_line;
+    int    endian;
+    // 맵 데이터
+    char   **map_data;
+    int     map_width;
+    int     map_height;
 }   t_ray;
 
 typedef struct s_cordi
