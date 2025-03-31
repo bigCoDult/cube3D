@@ -70,14 +70,15 @@ static void	*malloc_map(t_total *total, int row, int col)
 void	extract_map(char *file, t_total *total)
 {
 	int	i;
-	int	row;
 	int	col;
+	int	row;
 
 	i = 0;
 	row = 0;
 	col = 0;
 	i = find_map_start(file, i);
 	set_rowcol(file, i, &row, &col);
+	total->parsed->max = (t_cordi){col, row};
 	malloc_map(total, row, col);
 	row = 0;
 	col = 0;

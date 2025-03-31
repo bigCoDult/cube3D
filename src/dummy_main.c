@@ -1,7 +1,7 @@
 #include "../inc/cub3d.h"
 
 /*
-cc -g dummy_main.c extract_map.c extract_str.c extract_img.c ../libft/libft.a ../minilibx-linux/libmlx_Linux.a -lX11 -lXext -lXrandr
+cc -g dummy_main.c extract_map.c extract_str.c extract_img.c validate.c ../libft/libft.a ../minilibx-linux/libmlx_Linux.a -lX11 -lXext -lXrandr
 cc -g dummy_main.c extract_map.c extract_str.c extract_img.c ../libft/libft.a ../minilibx-linux/libmlx_Darwin.a -I/opt/X11/include -L/opt/X11/lib -lX11 -lXext -lXrandr
 make 대신 사용한 임시 컴파일 명령어
 */
@@ -47,7 +47,7 @@ int	main(void)
 	
 	printf("\n\n\n");
 	if (total->parsed->player->col != 0)
-		printf("player colrow: %c %d, %d\n", total->parsed->map[total->parsed->player->col][total->parsed->player->row], total->parsed->player->col, total->parsed->player->row);
+		printf("player coordinate: %c %d, %d\n", total->parsed->map[total->parsed->player->col][total->parsed->player->row], total->parsed->player->col, total->parsed->player->row);
 	else
 		printf("player not found\n");
 	printf("\n\n\n");

@@ -122,6 +122,7 @@ typedef struct s_parsed
 	char **map; // {' ', 1, 0, P}로 구성된 맵
 	t_cordi *player; // 플레이어의 위치
 	int direction; // 플레이어가 바라보고 있는 방향 = 게임을 시작했을때 보여야 하는 타일
+	t_cordi max; // 맵의 최대 크기
 } t_parsed;
 
 typedef struct s_mlx
