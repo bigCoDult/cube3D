@@ -83,9 +83,7 @@ void	extract_map(char *file, t_total *total)
 	col = 0;
 	while (file[i] != '\0')
 	{
-		if (file[i] == '\n' && file[i + 1] == '\n')
-			return ;
-		else if (file[i] == '\n')
+		if (file[i] == '\n')
 		{
 			col++;
 			row = 0;

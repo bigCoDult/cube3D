@@ -52,7 +52,7 @@ int	main(void)
 		printf("player not found\n");
 	printf("\n\n\n");
 	
-	
+	validate(total);
 	
 	
 	

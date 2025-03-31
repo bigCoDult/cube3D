@@ -141,6 +141,7 @@ typedef struct s_total // minishell에서의 t_shell과 같음
 int		extract_str(int fd, t_total *total);
 void	extract_map(char *file, t_total *total);
 void	extract_img(t_total *total);
+int	validate(t_total *total);
 
 
 #endif /* CUB3D_H */
