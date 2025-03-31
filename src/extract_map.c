@@ -89,6 +89,8 @@ void	extract_map(char *file, t_total *total)
 		else
 		{
 			total->parsed->map[col][row] = file[i];
+			if (file[i] != '1' && file[i] != '0' && file[i] != ' ')
+				total->parsed->player = (t_cordi *){col, row};
 			row++;
 		}
 		i++;
