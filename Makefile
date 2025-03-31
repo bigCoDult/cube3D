@@ -1,4 +1,4 @@
-NAME = dub3D
+NAME = cub3D
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g -O0
