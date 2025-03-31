@@ -42,17 +42,31 @@ int	main(void)
 		col++;
 	}
 	printf("------------map end------------\n");
+	printf("\n\n\n");
+	printf("------------val start------------\n");
+	while (total->parsed->val_map[col] != NULL)
+	{
+		printf("%s\n", total->parsed->val_map[col]);
+		col++;
+	}
+	printf("------------val end------------\n");
+	
+	printf("\n\n\n");
+
+	printf("player colrow: %c %d, %d\n", total->parsed->map[total->parsed->player->col][total->parsed->player->row], total->parsed->player->col, total->parsed->player->row);
+	// total->mlx = malloc(sizeof(t_mlx));
+	// total->mlx->mlx_ptr = mlx_init();
+	// total->mlx->win_ptr = mlx_new_window(total->mlx->mlx_ptr, 300, 300, "pokemon mountain");
+	// extract_img(total);
+	// mlx_put_image_to_window(total->mlx->mlx_ptr, total->mlx->win_ptr, total->parsed->image_info->north, 0, 0);
+	// mlx_put_image_to_window(total->mlx->mlx_ptr, total->mlx->win_ptr, total->parsed->image_info->south, 64, 0);
+	// mlx_put_image_to_window(total->mlx->mlx_ptr, total->mlx->win_ptr, total->parsed->image_info->west, 0, 64);
+	// mlx_put_image_to_window(total->mlx->mlx_ptr, total->mlx->win_ptr, total->parsed->image_info->east, 64, 64);
+	// mlx_loop(total->mlx->mlx_ptr);
+	
+	exit(0);
 	
 	
-	total->mlx = malloc(sizeof(t_mlx));
-	total->mlx->mlx_ptr = mlx_init();
-	total->mlx->win_ptr = mlx_new_window(total->mlx->mlx_ptr, 300, 300, "pokemon mountain");
-	extract_img(total);
-	mlx_put_image_to_window(total->mlx->mlx_ptr, total->mlx->win_ptr, total->parsed->image_info->north, 0, 0);
-	mlx_put_image_to_window(total->mlx->mlx_ptr, total->mlx->win_ptr, total->parsed->image_info->south, 64, 0);
-	mlx_put_image_to_window(total->mlx->mlx_ptr, total->mlx->win_ptr, total->parsed->image_info->west, 0, 64);
-	mlx_put_image_to_window(total->mlx->mlx_ptr, total->mlx->win_ptr, total->parsed->image_info->east, 64, 64);
-	mlx_loop(total->mlx->mlx_ptr);
 	col = 0;
 	while (total->parsed->map[col] != NULL)
 	{
