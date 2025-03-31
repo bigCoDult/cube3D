@@ -30,7 +30,9 @@ static void	set_rowcol(char *file, int i, int *row, int *col)
 	*col = 1;
 	while (file[i] != '\0')
 	{
-		if (file[i] == '\n')
+		if (file[i] == '\n' && file[i + 1] == '\n')
+			return ;
+		else if (file[i] == '\n')
 		{
 			(*col)++;
 			line_i = 0;
@@ -49,22 +51,17 @@ static void	set_rowcol(char *file, int i, int *row, int *col)
 static void	*malloc_map(t_total *total, int row, int col)
 {
 	total->parsed->map = (char **)malloc(sizeof(char *) * (col + 1));
-	total->parsed->val_map = (char **)malloc(sizeof(char *) * (col + 1));
 	total->parsed->map[col] = NULL;
-	total->parsed->val_map[col] = NULL;
 	if (!total->parsed->map)
 		return (NULL);
 	col--;
 	while (col >= 0)
 	{
 		total->parsed->map[col] = (char *)malloc(sizeof(char) * (row + 1));
-		total->parsed->val_map[col] = (char *)malloc(sizeof(char) * (row + 1));
 		if (!total->parsed->map[col])
 			return (NULL);
 		ft_memset(total->parsed->map[col], ' ', row);
-		ft_memset(total->parsed->val_map[col], ' ', row);
 		total->parsed->map[col][row] = '\0';
-		total->parsed->val_map[col][row] = '\0';
 		col--;
 	}
 	return (total->parsed->map);
@@ -86,7 +83,9 @@ void	extract_map(char *file, t_total *total)
 	col = 0;
 	while (file[i] != '\0')
 	{
-		if (file[i] == '\n')
+		if (file[i] == '\n' && file[i + 1] == '\n')
+			return ;
+		else if (file[i] == '\n')
 		{
 			col++;
 			row = 0;
@@ -94,11 +93,8 @@ void	extract_map(char *file, t_total *total)
 		else
 		{
 			total->parsed->map[col][row] = file[i];
-			if (file[i] != '1' && file[i] != '0' && file[i] != ' ')
-			{
-				total->parsed->player = (t_cordi *)malloc(sizeof(t_cordi));
+			if (file[i] != '1' && file[i] != '0' && file[i] != ' ' && file[i] != '\n' && file[i] != '\0')
 				*(total->parsed->player) = (t_cordi){col, row};
-			}
 			row++;
 		}
 		i++;
