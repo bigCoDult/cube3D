@@ -1,4 +1,4 @@
-#include "../../inc/cub3d.h"
+#include "../inc/cub3d.h"
 
 void extract_img(t_total *total)
 {

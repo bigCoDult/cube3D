@@ -1,4 +1,4 @@
-#include "../../inc/cub3d.h"
+#include "../inc/cub3d.h"
 // #include <cub3d.h>
 
 static int	count_space(char *str)

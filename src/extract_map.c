@@ -1,4 +1,4 @@
-#include "../../inc/cub3d.h"
+#include "../inc/cub3d.h"
 
 static int	is_map_part(char c)
 {
