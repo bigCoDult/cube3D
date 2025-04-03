@@ -10,7 +10,7 @@ cc -g dummy_main.c extract_map.c extract_str.c extract_img.c ../libft/libft.a ..
 mlx 오류 해결
 	int	mlx_int_anti_resize_win() 안에 memset(&hints, 0, sizeof(hints)); 이 라인 추가
 */
-int	main(void)
+int	main2(void)
 {
 	t_total	*total;
 	int		fd;
@@ -24,8 +24,6 @@ int	main(void)
 	total = (t_total *)ft_calloc(sizeof(t_total), 1);
 	
 	total->parsed = malloc(sizeof(t_parsed));
-	total->parsed->extracted_str = malloc(sizeof(t_extracted_str));
-	total->parsed->player = (t_cordi *)ft_calloc(sizeof(t_cordi), 1);
 	
 	extract_str(fd, total);
 	print_parsed(total);
