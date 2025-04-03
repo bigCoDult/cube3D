@@ -12,8 +12,10 @@ INC_DIR = ./inc
 
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX = $(MLX_DIR)/libmlx_Linux.a
+# MLX = $(MLX_DIR)/libmlx_Darwin.a
 
 LDFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lX11 -lXext -lXrandr -lm
+# LDFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -I/opt/X11/include -L/opt/X11/lib -lmlx -lX11 -lXext -lXrandr -lm
 INC = -I$(MLX_DIR) -I$(LIBFT_DIR) -I$(INC_DIR)
 
 SRC = \
