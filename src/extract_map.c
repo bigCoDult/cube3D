@@ -1,4 +1,4 @@
-#include "../../inc/cub3d.h"
+#include "../inc/cub3d.h"
 
 static int	is_map_part(char c)
 {
@@ -30,7 +30,9 @@ static void	set_rowcol(char *file, int i, int *row, int *col)
 	*col = 1;
 	while (file[i] != '\0')
 	{
-		if (file[i] == '\n')
+		if (file[i] == '\n' && file[i + 1] == '\n')
+			return ;
+		else if (file[i] == '\n')
 		{
 			(*col)++;
 			line_i = 0;
@@ -68,14 +70,15 @@ static void	*malloc_map(t_total *total, int row, int col)
 void	extract_map(char *file, t_total *total)
 {
 	int	i;
-	int	row;
 	int	col;
+	int	row;
 
 	i = 0;
 	row = 0;
 	col = 0;
 	i = find_map_start(file, i);
 	set_rowcol(file, i, &row, &col);
+	total->parsed->max = (t_cordi){col, row};
 	malloc_map(total, row, col);
 	row = 0;
 	col = 0;
@@ -89,6 +92,8 @@ void	extract_map(char *file, t_total *total)
 		else
 		{
 			total->parsed->map[col][row] = file[i];
+			if (file[i] != '1' && file[i] != '0' && file[i] != ' ' && file[i] != '\n' && file[i] != '\0')
+				*(total->parsed->player) = (t_cordi){col, row};
 			row++;
 		}
 		i++;

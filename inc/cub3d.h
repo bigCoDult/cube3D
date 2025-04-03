@@ -83,8 +83,8 @@ typedef struct s_ray
 
 typedef struct s_cordi
 {
-	int	row;
 	int	col;
+	int	row;
 }	t_cordi;
 
 typedef enum e_direction
@@ -122,6 +122,7 @@ typedef struct s_parsed
 	char **map; // {' ', 1, 0, P}로 구성된 맵
 	t_cordi *player; // 플레이어의 위치
 	int direction; // 플레이어가 바라보고 있는 방향 = 게임을 시작했을때 보여야 하는 타일
+	t_cordi max; // 맵의 최대 크기
 } t_parsed;
 
 typedef struct s_mlx
@@ -141,6 +142,8 @@ typedef struct s_total // minishell에서의 t_shell과 같음
 int		extract_str(int fd, t_total *total);
 void	extract_map(char *file, t_total *total);
 void	extract_img(t_total *total);
-
+int		validate(t_total *total);
+void	print_parsed(t_total *total);
+int		init_about_mlx(t_total *total);
 
 #endif /* CUB3D_H */

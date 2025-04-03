@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 22:39:31 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/03/28 17:02:40 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/03 12:42:23 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,9 @@ char	*file_to_str(int fd)
 {
 	char	buf[6];
 	int		read_return;
-	// int		index;
 	char	*result;
 
 	read_return = 5;
-	// index = 0;
 	result = malloc(sizeof(char) * 1);
 	if (result == NULL)
 		return (NULL);
