@@ -79,6 +79,11 @@ typedef struct s_ray
     char   **map_data;
     int     map_width;
     int     map_height;
+    // 텍스처 관련 정보
+    void   **tex_imgs;    // 각 방향별 텍스처 이미지 포인터
+    int    **textures;    // 각 방향별 텍스처 픽셀 데이터
+    int     tex_width;    // 텍스처 가로 크기
+    int     tex_height;   // 텍스처 세로 크기
 }   t_ray;
 
 typedef struct s_cordi
