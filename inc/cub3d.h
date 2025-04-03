@@ -145,5 +145,6 @@ void	extract_img(t_total *total);
 int		validate(t_total *total);
 void	print_parsed(t_total *total);
 int		init_about_mlx(t_total *total);
+void    start_raycast(t_total *total);
 
 #endif /* CUB3D_H */

@@ -41,14 +41,42 @@ static int	is_closed(t_total *total)
 	return (1);
 }
 
+static int is_path(t_total *total)
+{
+	int fd_north;
+	int fd_south;
+	int fd_east;
+	int fd_west;
+
+	fd_north = open(total->parsed->extracted_str->north, O_RDONLY);
+	fd_south = open(total->parsed->extracted_str->south, O_RDONLY);
+	fd_east = open(total->parsed->extracted_str->east, O_RDONLY);
+	fd_west = open(total->parsed->extracted_str->west, O_RDONLY);
+	if (fd_north != -1)
+		close(fd_north);
+	if (fd_south != -1)
+		close(fd_south);
+	if (fd_east != -1)
+		close(fd_east);
+	if (fd_west != -1)
+		close(fd_west);
+	if (fd_north == -1 || fd_south == -1 || fd_east == -1 || fd_west == -1)
+	{
+		printf("invalid img path\n");
+		return (0);
+	}
+	else
+		return (1);
+}
+
 int	validate(t_total *total)
 {
 	if (!is_closed(total))
-	{
 		printf("\nmap XXXXX\n\n");
-		return (0);
-	}
-	printf("\nmap OOOOO\n\n");
-	return (1);
+	else if (!is_path(total))
+		printf("\nimg path XXXXX\n\n");
+	else
+		return (1);
+	return (0);
 
 }

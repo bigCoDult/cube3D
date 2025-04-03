@@ -83,6 +83,9 @@ int	extract_str(int fd, t_total *total)
 {
 	char	*file;
 
+	total->parsed = (t_parsed *)malloc(sizeof(t_parsed));
+	total->parsed->extracted_str = malloc(sizeof(t_extracted_str));
+	total->parsed->player = (t_cordi *)ft_calloc(sizeof(t_cordi), 1);
 	file = file_to_str(fd);
 	if (!file)
 	{

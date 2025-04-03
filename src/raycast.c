@@ -7,47 +7,56 @@ void    raycast(t_total *total);
 void create_dummy_map(t_total *total, t_ray *ray)
 {
     // 더미 맵 데이터 생성
-    char *map_data[] = {
-        "11111111111111111111111111111111",
-        "10000000000000000000000000000001",
-        "10000000000000000000000000000001",
-        "10000111100001100000000000000001",
-        "10000100100001100000000000000001",
-        "10000111100001100000000000000001",
-        "10000100000001100000000000000001",
-        "10000111100001100000000000000001",
-        "10000000000000000000000000000001",
-        "10000000000000000001111000000001",
-        "10000000000000000000000000000001",
-        "10000000000000000000000000000001",
-        "10000000000000000N00000000000001",
-        "10000000000000000000000000000001",
-        "10000000000000000000000000000001",
-        "10000000000000000000000000000001",
-        "11111111111111111111111111111111",
-        NULL
-    };
+    // char *map_data[] = {
+    //     "11111111111111111111111111111111",
+    //     "10000000000000000000000000000001",
+    //     "10000000000000000000000000000001",
+    //     "10000111100001100000000000000001",
+    //     "10000100100001100000000000000001",
+    //     "10000111100001100000000000000001",
+    //     "10000100000001100000000000000001",
+    //     "10000111100001100000000000000001",
+    //     "10000000000000000000000000000001",
+    //     "10000000000000000001111000000001",
+    //     "10000000000000000000000000000001",
+    //     "10000000000000000000000000000001",
+    //     "10000000000000000N00000000000001",
+    //     "10000000000000000000000000000001",
+    //     "10000000000000000000000000000001",
+    //     "10000000000000000000000000000001",
+    //     "11111111111111111111111111111111",
+    //     NULL
+    // };
 
-    // 맵 할당 및 복사
-    int i = 0;
-    while (map_data[i])
-        i++;
+    // // 맵 할당 및 복사
+    // int i = 0;
+    // while (map_data[i])
+    //     i++;
     
-    total->parsed = malloc(sizeof(t_parsed));
-    total->parsed->map = malloc(sizeof(char *) * (i + 1));
+    // total->parsed = malloc(sizeof(t_parsed));
+    // total->parsed->map = malloc(sizeof(char *) * (i + 1));
     
-    i = 0;
-    while (map_data[i])
-    {
-        total->parsed->map[i] = ft_strdup(map_data[i]);
-        i++;
-    }
-    total->parsed->map[i] = NULL;
+    // i = 0;
+    // while (map_data[i])
+    // {
+    //     total->parsed->map[i] = ft_strdup(map_data[i]);
+    //     i++;
+    // }
+    // total->parsed->map[i] = NULL;
     
     // ray 구조체에 맵 정보 저장
     ray->map_data = total->parsed->map;
-    ray->map_height = i;
-    ray->map_width = ft_strlen(map_data[0]);
+    // ray->map_height = i;
+    // ray->map_width = ft_strlen(map_data[0]);
+	int col = 0;
+	ray->map_width = 0;
+	while (total->parsed->map[col] != NULL)
+	{
+		if (ray->map_width < (int)ft_strlen(total->parsed->map[col]))
+			ray->map_width = (int)ft_strlen(total->parsed->map[col]);
+		col++;
+	}
+	ray->map_height = col;
 }
 
 // 플레이어 위치 및 방향 초기화
@@ -131,6 +140,7 @@ void    init_image(t_total *total, t_ray *ray)
 // 광선 초기화
 void    init_ray(t_total *total, t_ray *ray, int x)
 {
+	(void)total;
     ray->screenX = x;
     // 카메라 평면 좌표 계산 : 화면의 X좌표를 -1 ~ 1 사이로 정규화
     ray->cameraX = 2 * ray->screenX / (double)ray->screenWidth - 1;
@@ -345,13 +355,13 @@ int     key_press(int keycode, t_total *total)
 
     // macOS 키 코드
     // ESC로 종료
-    if (keycode == 53) // ESC 키
+    if (keycode == 53 || keycode == 65307) // ESC 키
     {
         mlx_destroy_window(total->mlx->mlx_ptr, total->mlx->win_ptr);
         exit(0);
     }
     // 앞으로 이동
-    else if (keycode == 3768 || keycode == 126) // W 키 또는 위쪽 화살표
+    else if (keycode == 3768 || keycode == 126 || keycode == 119) // W 키 또는 위쪽 화살표
     {
         if (ray->map_data[(int)(ray->posY)][(int)(ray->posX + ray->dirX * moveSpeed)] != '1')
             ray->posX += ray->dirX * moveSpeed;
@@ -359,7 +369,7 @@ int     key_press(int keycode, t_total *total)
             ray->posY += ray->dirY * moveSpeed;
     }
     // 뒤로 이동
-    else if (keycode == 3748 || keycode == 125) // S 키 또는 아래쪽 화살표
+    else if (keycode == 3748 || keycode == 125 || keycode == 115) // S 키 또는 아래쪽 화살표
     {
         if (ray->map_data[(int)(ray->posY)][(int)(ray->posX - ray->dirX * moveSpeed)] != '1')
             ray->posX -= ray->dirX * moveSpeed;
@@ -367,7 +377,7 @@ int     key_press(int keycode, t_total *total)
             ray->posY -= ray->dirY * moveSpeed;
     }
     // 왼쪽으로 회전
-    else if (keycode == 3761 || keycode == 123) // A 키 또는 왼쪽 화살표
+    else if (keycode == 3761 || keycode == 123 || keycode == 97) // A 키 또는 왼쪽 화살표
     {
         double oldDirX = ray->dirX;
         ray->dirX = ray->dirX * cos(-rotSpeed) - ray->dirY * sin(-rotSpeed);
@@ -377,7 +387,7 @@ int     key_press(int keycode, t_total *total)
         ray->planeY = oldPlaneX * sin(-rotSpeed) + ray->planeY * cos(-rotSpeed);
     }
     // 오른쪽으로 회전
-    else if (keycode == 3767 || keycode == 124) // D 키 또는 오른쪽 화살표
+    else if (keycode == 3767 || keycode == 124 || keycode == 100) // D 키 또는 오른쪽 화살표
     {
         double oldDirX = ray->dirX;
         ray->dirX = ray->dirX * cos(rotSpeed) - ray->dirY * sin(rotSpeed);
@@ -434,23 +444,23 @@ void    start_raycast(t_total *total)
     raycast(total);
 }
 
-int main()
-{
-    t_total *total;
+// int main()
+// {
+//     t_total *total;
 
-    // 메모리 할당
-    total = (t_total *)malloc(sizeof(t_total));
-    total->mlx = malloc(sizeof(t_mlx));
+//     // 메모리 할당
+//     total = (t_total *)malloc(sizeof(t_total));
+//     total->mlx = malloc(sizeof(t_mlx));
     
-    // MLX 초기화
-    total->mlx->mlx_ptr = mlx_init();
-    total->mlx->win_ptr = mlx_new_window(total->mlx->mlx_ptr, 800, 600, "Raycasting Test");
+//     // MLX 초기화
+//     total->mlx->mlx_ptr = mlx_init();
+//     total->mlx->win_ptr = mlx_new_window(total->mlx->mlx_ptr, 800, 600, "Raycasting Test");
     
-    // 레이캐스팅 설정 및 시작
-    start_raycast(total);
+//     // 레이캐스팅 설정 및 시작
+//     start_raycast(total);
     
-    // MLX 루프 실행
-    mlx_loop(total->mlx->mlx_ptr);
+//     // MLX 루프 실행
+//     mlx_loop(total->mlx->mlx_ptr);
     
-    return (0);
-}
+//     return (0);
+// }

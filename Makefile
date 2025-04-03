@@ -8,21 +8,24 @@ SRC_DIR = ./src
 OBJ_DIR = ./obj
 LIBFT_DIR = ./libft
 MLX_DIR = ./minilibx-linux
+INC_DIR = ./inc
 
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX = $(MLX_DIR)/libmlx_Linux.a
 
-LDFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lX11 -lXext -lXrandr
-INC = -I$(MLX_DIR) -I$(LIBFT_DIR)
+LDFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lX11 -lXext -lXrandr -lm
+INC = -I$(MLX_DIR) -I$(LIBFT_DIR) -I$(INC_DIR)
 
 SRC = \
-	$(SRC_DIR)/dummy_main.c \
 	$(SRC_DIR)/extract_img.c \
 	$(SRC_DIR)/extract_map.c \
 	$(SRC_DIR)/extract_str.c \
 	$(SRC_DIR)/init_about_mlx.c \
 	$(SRC_DIR)/print_parsed.c \
-	$(SRC_DIR)/validate.c
+	$(SRC_DIR)/validate.c \
+	$(SRC_DIR)/raycast.c \
+	$(SRC_DIR)/render.c \
+	$(SRC_DIR)/main.c
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 all: $(OBJ_DIR) $(NAME)
