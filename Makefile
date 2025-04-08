@@ -27,6 +27,8 @@ SRC = \
 	$(SRC_DIR)/validate.c \
 	$(SRC_DIR)/raycast.c \
 	$(SRC_DIR)/render.c \
+	$(SRC_DIR)/control.c \
+	$(SRC_DIR)/memory.c \
 	$(SRC_DIR)/main.c
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
