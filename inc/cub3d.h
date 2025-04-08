@@ -13,6 +13,22 @@
 # include <stdlib.h>
 #include <math.h>
 
+// 할당된 메모리의 주소가 기록된 구조체
+typedef struct s_mem_node
+{
+    void *ptr;
+    size_t size;
+    char *label;
+    struct s_mem_node *next;
+} t_mem_node;
+
+typedef struct s_mem_tracker
+{
+    t_mem_node *head;
+    int count;
+    size_t total_size;
+} t_mem_tracker;
+
 typedef struct s_ray
 {
     // 플레이어 위치 좌표
@@ -141,6 +157,7 @@ typedef struct s_total // minishell에서의 t_shell과 같음
 	t_parsed *parsed;
 	t_mlx *mlx;
 	t_ray *ray;
+	t_mem_tracker *mem_tracker;  // 메모리 추적 구조체 추가
 	// 필요한것 추가 바랍니다
 } t_total;
 
@@ -151,5 +168,31 @@ int		validate(t_total *total);
 void	print_parsed(t_total *total);
 int		init_about_mlx(t_total *total);
 void    start_raycast(t_total *total);
+
+// control.c
+int		key_press(int keycode, t_total *total);
+int		close_window(t_total *total);
+void	init_player(t_ray *ray);
+
+// render.c
+void	draw_wall(t_ray *ray, int x);
+void	init_image(t_total *total, t_ray *ray);
+void	load_textures(t_total *total, t_ray *ray);
+
+// raycast.c
+void	raycast(t_total *total);
+void	init_ray(t_total *total, t_ray *ray, int x);
+void	calculate_step(t_ray *ray);
+void	dda(t_ray *ray);
+void	cal_distance(t_ray *ray);
+void	cal_wall_height(t_ray *ray);
+void	cal_wall_texture(t_ray *ray);
+
+// memory.c
+void init_mem_tracker(t_total *total);
+void *tracked_malloc(t_total *total, size_t size, char *label);
+void tracked_free(t_total *total, void *ptr);
+void print_mem_status(t_total *total);
+void free_all_memory(t_total *total);
 
 #endif /* CUB3D_H */

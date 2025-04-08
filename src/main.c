@@ -16,10 +16,17 @@
 // 	*/
 // }
 
-int main()
+int main(int argc, char **argv)
 {
     t_total *total;
 	int		fd;
+	(void)argv;
+
+	if (argc != 2)
+	{
+		ft_putstr_fd("Error\nUsage: ./cub3d [map_file.cub]\n", 2);
+		return (1);
+	}
 
 	// 맵파일 열기
 	fd = open("./img/map.cub", O_RDONLY);
@@ -31,6 +38,9 @@ int main()
 
 	// t_total 메모리 할당
     total = (t_total *)malloc(sizeof(t_total));
+
+	// 메모리 추적 초기화
+	init_mem_tracker(total);
 	
 	// 맵에서 str 추출
 	extract_str(fd, total);
@@ -51,5 +61,12 @@ int main()
     
     // MLX 루프 실행
     mlx_loop(total->mlx->mlx_ptr);
+    
+    // 프로그램 종료 직전에 메모리 정리
+    // print_mem_status(total); // 디버깅용, 정리 전 메모리 상태 출력
+    free_all_memory(total); // 할당된 모든 메모리 해제
+    free(total->mem_tracker); // 메모리 추적기 자체 해제
+    free(total); // total 구조체 해제
+    
     return (0);
 }
