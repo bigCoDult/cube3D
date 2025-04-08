@@ -46,6 +46,8 @@ void    load_textures(t_total *total, t_ray *ray)
     // 텍스처 크기 저장 (모든 텍스처는 동일한 크기로 가정)
     ray->tex_width = width;
     ray->tex_height = height;
+	ray->ceiling_color = ft_atohex(total->parsed->image_info->ceiling);
+	ray->floor_color = ft_atohex(total->parsed->image_info->floor);
 }
 
 // 벽 그리기 함수
@@ -70,7 +72,7 @@ void    draw_wall(t_ray *ray, int x)
     y = 0;
     while (y < ray->drawStart)
     {
-        ray->data[y * ray->screenWidth + x] = 0x000000;
+        ray->data[y * ray->screenWidth + x] = ray->ceiling_color;
         y++;
     }
 
@@ -114,7 +116,7 @@ void    draw_wall(t_ray *ray, int x)
     // 바닥 그리기 (회색)
     while (y < ray->screenHeight)
     {
-        ray->data[y * ray->screenWidth + x] = 0x444444;
+        ray->data[y * ray->screenWidth + x] = ray->floor_color;
         y++;
     }
 }

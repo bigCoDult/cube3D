@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/26 22:39:31 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/03 12:42:23 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/03 16:51:02 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static char	*join_s_till_c(char *s1, char *s2, char c)
 	return (out_s);
 }
 
-static char	*join_s(char *st_s, char *buf)
+char	*join_s(char *st_s, char *buf)
 {
 	char	*new_line;
 

@@ -100,6 +100,8 @@ typedef struct s_ray
     int    **textures;    // 각 방향별 텍스처 픽셀 데이터
     int     tex_width;    // 텍스처 가로 크기
     int     tex_height;   // 텍스처 세로 크기
+	int		ceiling_color; // 천장 색상
+	int		floor_color;   // 바닥 색상
 }   t_ray;
 
 typedef struct s_cordi
@@ -132,7 +134,7 @@ typedef struct s_image_info
 	void *south;
 	void *east;
 	void *west;
-	char *ceiling; /* "숫자,숫자,숫자" 이 형태의 문자열*/
+	char *ceiling; /* "0xFF00FF" 이 형태의 문자열*/
 	char *floor;
 } t_image_info;
 
@@ -161,10 +163,14 @@ typedef struct s_total // minishell에서의 t_shell과 같음
 	// 필요한것 추가 바랍니다
 } t_total;
 
+// 추출
 int		extract_str(int fd, t_total *total);
 void	extract_map(char *file, t_total *total);
 void	extract_img(t_total *total);
+// 검사
 int		validate(t_total *total);
+int		ft_atohex(char *hex);
+
 void	print_parsed(t_total *total);
 int		init_about_mlx(t_total *total);
 void    start_raycast(t_total *total);
