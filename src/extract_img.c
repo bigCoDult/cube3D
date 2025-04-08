@@ -30,20 +30,30 @@ char	*dec_to_hex(char *dec)
 	hex[0] = "0123456789ABCDEF"[n / 16];
 	hex[1] = "0123456789ABCDEF"[n % 16];
 	hex[2] = '\0';
-	return (ft_strdup(hex));
+	return (hex);
 }
 char	*convert_rgb_to_hex(char *str)
 {
 	char **rgb;
 	char *hex;
-
+	char *tmp;
+	
 	rgb = ft_split(str, ',');
-	hex = ft_calloc(sizeof(char), 7);
-	// hex = join_s(hex, "0x");
-	hex = join_s(hex, dec_to_hex(rgb[0]));
-	hex = join_s(hex, dec_to_hex(rgb[1]));
-	hex = join_s(hex, dec_to_hex(rgb[2]));
-	return (ft_strdup(hex));
+	hex = ft_calloc(sizeof(char), 1);
+	tmp = dec_to_hex(rgb[0]);
+	hex = join_s(hex, tmp);
+	free(tmp);
+	tmp = dec_to_hex(rgb[1]);
+	hex = join_s(hex, tmp);
+	free(tmp);
+	tmp = dec_to_hex(rgb[2]);
+	hex = join_s(hex, tmp);
+	free(tmp);
+	free(rgb[0]);
+	free(rgb[1]);
+	free(rgb[2]);
+	free(rgb);
+	return (hex);
 }
 void extract_img(t_total *total)
 {
@@ -52,8 +62,6 @@ void extract_img(t_total *total)
 	printf("ceiling	: %s\n", total->parsed->extracted_str->ceiling);
 	printf("floor		: %s\n", total->parsed->extracted_str->floor);
 	total->parsed->image_info = malloc(sizeof(t_image_info));
-	total->parsed->image_info->ceiling = malloc(sizeof(char) * 9);
-	total->parsed->image_info->floor = malloc(sizeof(char) * 9);
 	total->parsed->image_info->ceiling = convert_rgb_to_hex(total->parsed->extracted_str->ceiling);
 	total->parsed->image_info->floor = convert_rgb_to_hex(total->parsed->extracted_str->floor);
 	printf("ceiling : %s\n", total->parsed->image_info->ceiling);
