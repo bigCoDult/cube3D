@@ -110,5 +110,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char	*file_to_str(int fd);
 int		is_space(char c);
 char	*ft_strndup(const char *src, int n);
+char	*join_s(char *st_s, char *buf);
 
 #endif /* LIBFT_H */
