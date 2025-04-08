@@ -63,7 +63,7 @@ int main(int argc, char **argv)
     mlx_loop(total->mlx->mlx_ptr);
     
     // 프로그램 종료 직전에 메모리 정리
-    // print_mem_status(total); // 디버깅용, 정리 전 메모리 상태 출력
+    print_mem_status(total); // 디버깅용, 정리 전 메모리 상태 출력
     free_all_memory(total); // 할당된 모든 메모리 해제
     free(total->mem_tracker); // 메모리 추적기 자체 해제
     free(total); // total 구조체 해제

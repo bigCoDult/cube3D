@@ -16,6 +16,10 @@ int     key_press(int keycode, t_total *total)
     if (keycode == 53 || keycode == 65307) // ESC 키
     {
         mlx_destroy_window(total->mlx->mlx_ptr, total->mlx->win_ptr);
+        print_mem_status(total); // 디버깅용, 정리 전 메모리 상태 출력
+        free_all_memory(total);
+        free(total->mem_tracker);
+        free(total);
         exit(0);
     }
     // 앞으로 이동
@@ -64,6 +68,7 @@ int     key_press(int keycode, t_total *total)
 int     close_window(t_total *total)
 {
     mlx_destroy_window(total->mlx->mlx_ptr, total->mlx->win_ptr);
+    print_mem_status(total); // 디버깅용, 정리 전 메모리 상태 출력
     free_all_memory(total);
     free(total->mem_tracker);
     free(total);

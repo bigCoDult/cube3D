@@ -16,8 +16,10 @@ void    load_textures(t_total *total, t_ray *ray)
     int height;
     
     // 텍스처 로드를 위한 포인터 초기화
-    ray->textures = (int **)malloc(sizeof(int *) * 4);
-    ray->tex_imgs = (void **)malloc(sizeof(void *) * 4);
+    // ray->textures = (int **)malloc(sizeof(int *) * 4);
+    ray->textures = tracked_malloc(total, sizeof(int *) * 4, "textures");
+    // ray->tex_imgs = (void **)malloc(sizeof(void *) * 4);
+    ray->tex_imgs = tracked_malloc(total, sizeof(void *) * 4, "tex_imgs");
     
     // 북쪽 텍스처
     ray->tex_imgs[0] = mlx_xpm_file_to_image(total->mlx->mlx_ptr, 
