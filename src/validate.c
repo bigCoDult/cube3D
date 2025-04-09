@@ -1,5 +1,12 @@
-// #include <cub3d.h>
-#include "../inc/cub3d.h"
+#include "cub3d.h"
+
+int	is_map_part(char c)
+{
+	if (c == '1' || c == '0' || c == ' ' || c == '\n' \
+		|| c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}
 
 static int	check_8way(t_total *total, int col, int row)
 {
@@ -77,21 +84,31 @@ static int	is_path(t_total *total)
 		return (1);
 }
 
-int	validate(t_total *total)
+int	is_xpm(t_total *total)
 {
-	if (!is_closed(total))
-		printf("\nmap XXXXX\n\n");
-	else if (!is_path(total))
-		printf("\nimg path XXXXX\n\n");
-	else
+	if (ft_endwith(total->parsed->extracted_str->north, ".xpm") && \
+		ft_endwith(total->parsed->extracted_str->south, ".xpm") && \
+		ft_endwith(total->parsed->extracted_str->east, ".xpm") && \
+		ft_endwith(total->parsed->extracted_str->west, ".xpm"))
 		return (1);
-	return (0);
+	else
+		return (0);
 }
 
-int	is_map_part(char c)
+// int	is_correct_count(t_total *total)
+// {
+// 	int	count;
+// 	int	i;
+
+// 	count = 0;
+// 	i = 0;
+// }
+
+int	validate(t_total *total)
 {
-	if (c == '1' || c == '0' || c == ' ' || c == '\n' \
-	|| c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	if (is_closed(total) && is_path(total) && is_xpm(total))
+	// if (is_closed(total) && is_path(total) && is_xpm(total) && is_correct_count(total))
 		return (1);
-	return (0);
+	else
+		return (0);
 }
