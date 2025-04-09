@@ -59,8 +59,11 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
-	$(MAKE) -C $(MLX_DIR) fclean
-
+# mlx에 fclean이 없음
+# mlx.a를 여기서 어떻게 지우지?
+# 대충 땜빵 했는데 이게 맞나?
+	$(MAKE) -C $(MLX_DIR) clean
+	$(RM) libmlx.a libmlx_Linux.a
 
 re: fclean all
 
