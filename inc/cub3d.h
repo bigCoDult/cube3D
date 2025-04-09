@@ -126,6 +126,7 @@ typedef struct s_extracted_str
 	char *west;
 	char *ceiling; /* "숫자,숫자,숫자" 이 형태의 문자열*/
 	char *floor;
+	char *file;
 } t_extracted_str;
 
 typedef struct s_image_info

@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 20:10:42 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/09 20:14:27 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/09 20:31:21 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	destroy_total(t_total *total)
 	mlx_destroy_image(total->mlx->mlx_ptr, total->parsed->image_info->west);
 	mlx_destroy_window(total->mlx->mlx_ptr, total->mlx->win_ptr);
 	mlx_destroy_display(total->mlx->mlx_ptr);
+	free(total->parsed->extracted_str->file);
 }
 
 void	free_success_case(t_total *total)
@@ -61,6 +62,7 @@ void	free_fail_case(t_total *total)
 	int	col;
 
 	col = 0;
+	free(total->parsed->extracted_str->file);
 	free(total->parsed->extracted_str->north);
 	free(total->parsed->extracted_str->south);
 	free(total->parsed->extracted_str->east);

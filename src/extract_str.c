@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 09:41:21 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/09 09:41:22 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/09 20:29:41 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,8 @@ int	extract_str(int fd, t_total *total)
 	total->parsed = (t_parsed *)malloc(sizeof(t_parsed));
 	total->parsed->extracted_str = malloc(sizeof(t_extracted_str));
 	total->parsed->player = (t_cordi *)ft_calloc(sizeof(t_cordi), 1);
-	file = file_to_str(fd);
+	total->parsed->extracted_str->file = file_to_str(fd);
+	file = total->parsed->extracted_str->file;
 	if (!file)
 	{
 		free(total->parsed->extracted_str);
@@ -113,6 +114,5 @@ int	extract_str(int fd, t_total *total)
 	total->parsed->extracted_str->ceiling = extract_value("C", file);
 	free_fail(file, total->parsed->extracted_str);
 	extract_map(file, total);
-	free(file);
 	return (0);
 }
