@@ -29,6 +29,7 @@ SRC = \
 	$(SRC_DIR)/render.c \
 	$(SRC_DIR)/control.c \
 	$(SRC_DIR)/memory.c \
+	$(SRC_DIR)/free_both_case.c \
 	$(SRC_DIR)/main.c
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
