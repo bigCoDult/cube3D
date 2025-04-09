@@ -80,3 +80,11 @@ int	validate(t_total *total)
 	return (0);
 
 }
+
+int	is_map_part(char c)
+{
+	if (c == '1' || c == '0' || c == ' ' || c == '\n' \
+	|| c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}

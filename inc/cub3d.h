@@ -170,6 +170,7 @@ void	extract_img(t_total *total);
 // 검사
 int		validate(t_total *total);
 int		ft_atohex(char *hex);
+int		is_map_part(char c);
 
 void	print_parsed(t_total *total);
 int		init_about_mlx(t_total *total);
