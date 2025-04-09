@@ -111,5 +111,6 @@ char	*file_to_str(int fd);
 int		is_space(char c);
 char	*ft_strndup(const char *src, int n);
 char	*join_s(char *st_s, char *buf);
+int		ft_endwith(char *str, char *end);
 
 #endif /* LIBFT_H */
