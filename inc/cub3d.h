@@ -189,11 +189,15 @@ void	load_textures(t_total *total, t_ray *ray);
 // raycast.c
 void	raycast(t_total *total);
 void	init_ray(t_total *total, t_ray *ray, int x);
+
+// raycast_cal.c
 void	calculate_step(t_ray *ray);
-void	dda(t_ray *ray);
 void	cal_distance(t_ray *ray);
 void	cal_wall_height(t_ray *ray);
 void	cal_wall_texture(t_ray *ray);
+
+// raycast_utils.c
+void    dda(t_ray *ray);
 
 // memory.c
 void init_mem_tracker(t_total *total);

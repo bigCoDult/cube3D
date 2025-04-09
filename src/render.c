@@ -17,8 +17,8 @@ void    load_textures(t_total *total, t_ray *ray)
     
     // 텍스처 로드를 위한 포인터 초기화
     // ray->textures = (int **)malloc(sizeof(int *) * 4);
-    ray->textures = tracked_malloc(total, sizeof(int *) * 4, "textures");
     // ray->tex_imgs = (void **)malloc(sizeof(void *) * 4);
+    ray->textures = tracked_malloc(toßtal, sizeof(int *) * 4, "textures");
     ray->tex_imgs = tracked_malloc(total, sizeof(void *) * 4, "tex_imgs");
     
     // 북쪽 텍스처
