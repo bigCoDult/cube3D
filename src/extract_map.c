@@ -1,12 +1,16 @@
-#include "../inc/cub3d.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   extract_map.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/09 09:33:50 by sanbaek           #+#    #+#             */
+/*   Updated: 2025/04/09 09:40:29 by sanbaek          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static int	is_map_part(char c)
-{
-	if (c == '1' || c == '0' || c == ' ' || c == '\n' \
-	|| c == 'N' || c == 'S' || c == 'E' || c == 'W')
-		return (1);
-	return (0);
-}
+#include "cub3d.h"
 
 static int	find_map_start(char *file, int i)
 {
@@ -67,6 +71,19 @@ static void	*malloc_map(t_total *total, int row, int col)
 	return (total->parsed->map);
 }
 
+static void	do_rowcol_job(char *file, int *i, t_total *total)
+{
+	int	col;
+	int	row;
+
+	row = 0;
+	col = 0;
+	*i = find_map_start(file, *i);
+	set_rowcol(file, *i, &row, &col);
+	total->parsed->max = (t_cordi){col, row};
+	malloc_map(total, row, col);
+}
+
 void	extract_map(char *file, t_total *total)
 {
 	int	i;
@@ -76,12 +93,7 @@ void	extract_map(char *file, t_total *total)
 	i = 0;
 	row = 0;
 	col = 0;
-	i = find_map_start(file, i);
-	set_rowcol(file, i, &row, &col);
-	total->parsed->max = (t_cordi){col, row};
-	malloc_map(total, row, col);
-	row = 0;
-	col = 0;
+	do_rowcol_job(file, &i, total);
 	while (file[i] != '\0')
 	{
 		if (file[i] == '\n')
@@ -92,7 +104,8 @@ void	extract_map(char *file, t_total *total)
 		else
 		{
 			total->parsed->map[col][row] = file[i];
-			if (file[i] != '1' && file[i] != '0' && file[i] != ' ' && file[i] != '\n' && file[i] != '\0')
+			if (file[i] != '1' && file[i] != '0' && file[i] != \
+				' ' && file[i] != '\n' && file[i] != '\0')
 				*(total->parsed->player) = (t_cordi){col, row};
 			row++;
 		}

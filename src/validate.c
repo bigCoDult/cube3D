@@ -3,50 +3,58 @@
 
 static int	check_8way(t_total *total, int col, int row)
 {
-	if (col == 0 || row == 0 || col == total->parsed->max.col -1 || row == total->parsed->max.row - 1)
+	if (col == 0 || row == 0 || col == total->parsed->max.col -1 \
+		|| row == total->parsed->max.row - 1)
 		return (0);
-	if (total->parsed->map[col - 1][row] == ' ' || total->parsed->map[col + 1][row] == ' ' \
-	|| total->parsed->map[col][row - 1] == ' ' || total->parsed->map[col][row + 1] == ' ' \
-	|| total->parsed->map[col - 1][row - 1] == ' ' || total->parsed->map[col - 1][row + 1] == ' ' \
-	|| total->parsed->map[col + 1][row - 1] == ' ' || total->parsed->map[col + 1][row + 1] == ' ')
+	if (total->parsed->map[col - 1][row] == ' ' || \
+		total->parsed->map[col + 1][row] == ' ' \
+	|| total->parsed->map[col][row - 1] == ' ' || \
+	total->parsed->map[col][row + 1] == ' ' \
+	|| total->parsed->map[col - 1][row - 1] == ' ' || \
+	total->parsed->map[col - 1][row + 1] == ' ' \
+	|| total->parsed->map[col + 1][row - 1] == ' ' \
+	|| total->parsed->map[col + 1][row + 1] == ' ')
 		return (0);
 	return (1);
 }
 
 static int	is_closed(t_total *total)
 {
-	int col;
-	int row;
-	col = 0;
-	row = 0;
-	while (total->parsed->map[col])
+	t_cordi	cordi;
+
+	cordi = (t_cordi){0, 0};
+	while (total->parsed->map[cordi.col])
 	{
-		if (total->parsed->map[col][row] == '1' || total->parsed->map[col][row] == ' ')
-			row++;
-		if (total->parsed->map[col][row] == '\0')
+		if (total->parsed->map[cordi.col][cordi.row] == '1' || \
+			total->parsed->map[cordi.col][cordi.row] == ' ')
+			cordi.row++;
+		if (total->parsed->map[cordi.col][cordi.row] == '\0')
 		{
-			row = 0;
-			col++;
-			continue;
+			cordi.row = 0;
+			cordi.col++;
+			continue ;
 		}
-		if (total->parsed->map[col][row] == '0' || total->parsed->map[col][row] == 'N' \
-		|| total->parsed->map[col][row] == 'S' || total->parsed->map[col][row] == 'E' \
-		|| total->parsed->map[col][row] == 'W')
+		// is_path_part()로 줄일것
+		if (total->parsed->map[cordi.col][cordi.row] == '0' || \
+			total->parsed->map[cordi.col][cordi.row] == 'N' \
+		|| total->parsed->map[cordi.col][cordi.row] == 'S' || \
+		total->parsed->map[cordi.col][cordi.row] == 'E' \
+		|| total->parsed->map[cordi.col][cordi.row] == 'W')
 		{
-			if (!check_8way(total, col, row))
+			if (!check_8way(total, cordi.col, cordi.row))
 				return (0);
-			row++;
+			cordi.row++;
 		}
 	}
 	return (1);
 }
 
-static int is_path(t_total *total)
+static int	is_path(t_total *total)
 {
-	int fd_north;
-	int fd_south;
-	int fd_east;
-	int fd_west;
+	int	fd_north;
+	int	fd_south;
+	int	fd_east;
+	int	fd_west;
 
 	fd_north = open(total->parsed->extracted_str->north, O_RDONLY);
 	fd_south = open(total->parsed->extracted_str->south, O_RDONLY);
@@ -78,5 +86,12 @@ int	validate(t_total *total)
 	else
 		return (1);
 	return (0);
+}
 
+int	is_map_part(char c)
+{
+	if (c == '1' || c == '0' || c == ' ' || c == '\n' \
+	|| c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
 }

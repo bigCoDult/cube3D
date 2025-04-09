@@ -15,12 +15,13 @@ int     key_press(int keycode, t_total *total)
     // ESC로 종료
     if (keycode == 53 || keycode == 65307) // ESC 키
     {
-        mlx_destroy_window(total->mlx->mlx_ptr, total->mlx->win_ptr);
-        print_mem_status(total); // 디버깅용, 정리 전 메모리 상태 출력
-        free_all_memory(total);
-        free(total->mem_tracker);
-        free(total);
-        exit(0);
+        // mlx_destroy_window(total->mlx->mlx_ptr, total->mlx->win_ptr);
+        // print_mem_status(total); // 디버깅용, 정리 전 메모리 상태 출력
+        // free_all_memory(total);
+        // free(total->mem_tracker);
+        // free(total);
+        // exit(0);
+		mlx_loop_end(total->mlx->mlx_ptr);
     }
     // 앞으로 이동
     else if (keycode == 3768 || keycode == 126 || keycode == 119) // W 키 또는 위쪽 화살표
@@ -67,12 +68,13 @@ int     key_press(int keycode, t_total *total)
 // 창 닫기 이벤트 처리 함수
 int     close_window(t_total *total)
 {
-    mlx_destroy_window(total->mlx->mlx_ptr, total->mlx->win_ptr);
-    print_mem_status(total); // 디버깅용, 정리 전 메모리 상태 출력
-    free_all_memory(total);
-    free(total->mem_tracker);
-    free(total);
-    exit(0);
+    // mlx_destroy_window(total->mlx->mlx_ptr, total->mlx->win_ptr);
+    // print_mem_status(total); // 디버깅용, 정리 전 메모리 상태 출력
+    // free_all_memory(total);
+    // free(total->mem_tracker);
+    // free(total);
+    // exit(0);
+	mlx_loop_end(total->mlx->mlx_ptr);
     return (0);
 }
 
