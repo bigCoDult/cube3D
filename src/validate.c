@@ -106,8 +106,8 @@ int	is_xpm(t_total *total)
 
 int	validate(t_total *total)
 {
-	if (is_closed(total) && is_path(total) && is_xpm(total))
 	// if (is_closed(total) && is_path(total) && is_xpm(total) && is_correct_count(total))
+	if (is_closed(total) && is_path(total) && is_xpm(total))
 		return (1);
 	else
 		return (0);

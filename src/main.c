@@ -49,7 +49,8 @@ int main(int argc, char **argv)
 	init_mem_tracker(total);
 	
 	// 맵에서 str 추출
-	extract_str(fd, total);
+	if (extract_str(fd, total) == -1)
+		return (1);
 	
 	//str 검증
 	if (validate(total))
