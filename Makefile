@@ -26,6 +26,8 @@ SRC = \
 	$(SRC_DIR)/print_parsed.c \
 	$(SRC_DIR)/validate.c \
 	$(SRC_DIR)/raycast.c \
+	$(SRC_DIR)/raycast_cal.c \
+	$(SRC_DIR)/raycast_utils.c \
 	$(SRC_DIR)/render.c \
 	$(SRC_DIR)/control.c \
 	$(SRC_DIR)/memory.c \
