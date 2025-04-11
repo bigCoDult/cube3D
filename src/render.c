@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/11 12:20:55 by yutsong           #+#    #+#             */
+/*   Updated: 2025/04/11 12:28:38 by yutsong          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
 void	init_image(t_total *total, t_ray *ray)
@@ -40,45 +52,72 @@ void	load_textures(t_total *total, t_ray *ray)
 	ray->floor_color = ft_atohex(total->parsed->image_info->floor);
 }
 
-// 벽 그리기 함수
-void	draw_wall(t_ray *ray, int x)
+// 텍스처 인덱스 결정 함수
+int	get_texture_index(t_ray *ray)
+{
+	if (ray->side == 0 && ray->rayDirX > 0)
+		return (0);
+	else if (ray->side == 0 && ray->rayDirX < 0)
+		return (1);
+	else if (ray->side == 1 && ray->rayDirY > 0)
+		return (2);
+	else
+		return (3);
+}
+
+// 천장 그리기 함수
+void	draw_ceiling(t_ray *ray, int x)
 {
 	int	y;
-	int	color;
-	int	tex_idx;
-	int	tex_x;
-	int	tex_y;
 
-	if (ray->side == 0 && ray->rayDirX > 0)
-		tex_idx = 0;
-	else if (ray->side == 0 && ray->rayDirX < 0)
-		tex_idx = 1;
-	else if (ray->side == 1 && ray->rayDirY > 0)
-		tex_idx = 2;
-	else
-		tex_idx = 3;
 	y = 0;
 	while (y < ray->drawStart)
 	{
 		ray->data[y * ray->screenWidth + x] = ray->ceiling_color;
 		y++;
 	}
-	y = ray->drawStart;
-	while (y < ray->drawEnd)
-	{
-		ray->texY = (int)ray->texPos & (ray->tex_height - 1);
-		ray->texPos += ray->step;
-		tex_x = ray->texX;
-		tex_y = ray->texY;
-		color = ray->textures[tex_idx][tex_y * ray->tex_width + tex_x];
-		if (ray->side == 1)
-			color = (color >> 1) & 0x7F7F7F;
-		ray->data[y * ray->screenWidth + x] = color;
-		y++;
-	}
+}
+
+// 바닥 그리기 함수
+void	draw_floor(t_ray *ray, int x)
+{
+	int	y;
+
+	y = ray->drawEnd;
 	while (y < ray->screenHeight)
 	{
 		ray->data[y * ray->screenWidth + x] = ray->floor_color;
 		y++;
 	}
+}
+
+// 벽 텍스처 그리기 함수
+void	draw_wall_texture(t_ray *ray, int x, int tex_idx)
+{
+	int	y;
+	int	color;
+	int	tex_x;
+	int	tex_y;
+
+	y = ray->drawStart;
+	while (y < ray->drawEnd)
+	{
+		tex_y = (int)ray->texPos & (ray->tex_height - 1);
+		ray->texPos += ray->step;
+		tex_x = ray->texX;
+		color = ray->textures[tex_idx][tex_y * ray->tex_width + tex_x];
+		ray->data[y * ray->screenWidth + x] = color;
+		y++;
+	}
+}
+
+// 메인 벽 그리기 함수
+void	draw_wall(t_ray *ray, int x)
+{
+	int	tex_idx;
+
+	tex_idx = get_texture_index(ray);
+	draw_ceiling(ray, x);
+	draw_wall_texture(ray, x, tex_idx);
+	draw_floor(ray, x);
 }
