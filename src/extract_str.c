@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 09:41:21 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/10 11:22:07 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/11 19:26:21 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	count_space(char *str)
 	return (i);
 }
 
-static int	find_i_key(char *file, const char *key)
+int	find_i_key(char *file, const char *key)
 {
 	int	i;
 	int	k;
@@ -52,8 +52,8 @@ static char	*extract_value(const char *key, char *file)
 	i_key = find_i_key(file, key);
 	if (\
 		i_key == -1 || \
-		(i_key != 0 && (!is_space(file[i_key - 1]))) || \
-		!is_space(file[i_key + ft_strlen(key)]))
+		(i_key != 0 && (!is_whitespace(file[i_key - 1]))) || \
+		!is_whitespace(file[i_key + ft_strlen(key)]))
 		{
 			printf("Error\nInvalid key\n");
 			return (NULL);
@@ -64,7 +64,7 @@ static char	*extract_value(const char *key, char *file)
 		return (NULL);
 	i_start += count_space(file + i_key + ft_strlen(key));
 	i_end = i_start;
-	while (file[i_end] && !is_space(file[i_end]))
+	while (file[i_end] && !is_whitespace(file[i_end]))
 		i_end++;
 	return (ft_strndup(file + i_start, i_end - i_start));
 }
