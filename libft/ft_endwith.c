@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 21:13:11 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/09 21:13:12 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/11 19:19:04 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,21 @@
 
 int	ft_endwith(char *str, char *end)
 {
-	char	*tmp;
+	int	len;
+	int	str_i;
+	int	end_i;
 
 	if (str == NULL || end == NULL)
 		return (0);
-	tmp = ft_strnstr(str, end, ft_strlen(str));
-	if (tmp[ft_strlen(end) - 1] == '\0')
-		return (1);
-	else
+	len = ft_strlen(end);
+	str_i = ft_strlen(str) - len;
+	end_i = 0;
+	if (str_i < 0)
 		return (0);
+	while (end[end_i])
+	{
+		if (str[str_i++] != end[end_i++])
+			return (0);
+	}
+	return (1);
 }
