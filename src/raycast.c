@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/11 12:21:00 by yutsong           #+#    #+#             */
+/*   Updated: 2025/04/11 12:21:00 by yutsong          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
 // 더미 맵 생성
@@ -6,7 +18,6 @@ void	create_dummy_map(t_total *total, t_ray *ray)
 	int	col;
 
 	col = 0;
-	// ray 구조체에 맵 정보 저장
 	ray->map_data = total->parsed->map;
 	ray->map_width = 0;
 	while (total->parsed->map[col] != NULL)
@@ -23,15 +34,11 @@ void	init_ray(t_total *total, t_ray *ray, int x)
 {
 	(void)total;
 	ray->screenX = x;
-	// 카메라 평면 좌표 계산 : 화면의 X좌표를 -1 ~ 1 사이로 정규화
 	ray->cameraX = 2 * ray->screenX / (double)ray->screenWidth - 1;
-	// 광선 방향 벡터 계산
 	ray->rayDirX = ray->dirX + ray->planeX * ray->cameraX;
 	ray->rayDirY = ray->dirY + ray->planeY * ray->cameraX;
-	// 현재 맵 그리드 좌표
 	ray->mapX = (int)ray->posX;
 	ray->mapY = (int)ray->posY;
-	// 다음 그리드까지 거리 : fabs는 절대값 구하는 함수
 	if (ray->rayDirX == 0)
 		ray->deltaDistX = 1e30;
 	else
@@ -40,7 +47,6 @@ void	init_ray(t_total *total, t_ray *ray, int x)
 		ray->deltaDistY = 1e30;
 	else
 		ray->deltaDistY = fabs(1 / ray->rayDirY);
-	// 충돌 여부
 	ray->hit = 0;
 }
 
@@ -63,7 +69,6 @@ void	raycast(t_total *total)
 		draw_wall(ray, width);
 		width++;
 	}
-	// 그려진 이미지를 화면에 표시
 	mlx_put_image_to_window(
 		total->mlx->mlx_ptr, total->mlx->win_ptr, ray->img, 0, 0);
 }
@@ -80,23 +85,14 @@ void	start_raycast(t_total *total)
 {
 	t_ray	*ray;
 
-	// 레이 구조체 할당
-	// total->ray = (t_ray *)malloc(sizeof(t_ray));
 	total->ray = tracked_malloc(total, sizeof(t_ray), "ray");
 	ray = (t_ray *)total->ray;
-	// 더미 맵 생성
 	create_dummy_map(total, ray);
-	// 이미지 초기화
 	init_image(total, ray);
-	// 플레이어 초기화
 	init_player(ray);
-	// 텍스처 로드
 	load_textures(total, ray);
-	// 키 이벤트 등록 (macOS 방식)
-	mlx_hook(total->mlx->win_ptr, 2, 1L << 0, key_press, total);  // 키를 누를 때
-	mlx_hook(total->mlx->win_ptr, 17, 0, close_window, total);  // 창 닫기 버튼
-	// 게임 루프 설정
+	mlx_hook(total->mlx->win_ptr, 2, 1L << 0, key_press, total);
+	mlx_hook(total->mlx->win_ptr, 17, 0, close_window, total);
 	mlx_loop_hook(total->mlx->mlx_ptr, game_loop, total);
-	// 초기 화면 그리기
 	raycast(total);
 }

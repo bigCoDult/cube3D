@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/11 12:20:44 by yutsong           #+#    #+#             */
+/*   Updated: 2025/04/11 12:20:45 by yutsong          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
 // DDA
@@ -5,7 +17,6 @@ void	dda(t_ray *ray)
 {
 	while (ray->hit == 0)
 	{
-		// X 평면과의 거리가 더 가까울때
 		if (ray->sideDistX < ray->sideDistY)
 		{
 			ray->sideDistX += ray->deltaDistX;
@@ -18,7 +29,6 @@ void	dda(t_ray *ray)
 			ray->mapY += ray->stepY;
 			ray->side = 1;
 		}
-		// 벽에 닿았나 확인
 		if (ray->mapY >= 0 && ray->mapY < ray->map_height
 			&& ray->mapX >= 0 && ray->mapX < ray->map_width
 			&& ray->map_data[ray->mapY][ray->mapX] == '1')

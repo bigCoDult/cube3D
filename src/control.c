@@ -1,91 +1,89 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   control.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/11 12:20:32 by yutsong           #+#    #+#             */
+/*   Updated: 2025/04/11 12:20:34 by yutsong          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/cub3d.h"
 
 // 키 이벤트 처리 함수
-int     key_press(int keycode, t_total *total)
+int	key_press(int keycode, t_total *total)
 {
-	double moveSpeed;
-	double rotSpeed;
-	t_ray *ray;
+	double	movespeed;
+	double	rotspeed;
+	t_ray	*ray;
+	double	olddirx;
+	double	oldplanex;
 
 	ray = (t_ray *)total->ray;
-	moveSpeed = 0.05;
-	rotSpeed = 0.03;
-	printf("키코드: %d\n", keycode); // 디버깅용
-
-	// ESC로 종료
-	if (keycode == 53 || keycode == 65307) // ESC 키
-	{
-		// mlx_destroy_window(total->mlx->mlx_ptr, total->mlx->win_ptr);
-		// print_mem_status(total); // 디버깅용, 정리 전 메모리 상태 출력
-		// free_all_memory(total);
-		// free(total->mem_tracker);
-		// free(total);
-		// exit(0);
+	movespeed = 0.05;
+	rotspeed = 0.03;
+	printf("키코드: %d\n", keycode);
+	if (keycode == 53 || keycode == 65307)
 		mlx_loop_end(total->mlx->mlx_ptr);
-	}
-	// 앞으로 이동
-	else if (keycode == 3768 || keycode == 126 || keycode == 119) // W 키 또는 위쪽 화살표
+	else if (keycode == 3768 || keycode == 126 || keycode == 119)
 	{
-		if (ray->map_data[(int)(ray->posY)][(int)(ray->posX + ray->dirX * moveSpeed)] != '1')
-			ray->posX += ray->dirX * moveSpeed;
-		if (ray->map_data[(int)(ray->posY + ray->dirY * moveSpeed)][(int)(ray->posX)] != '1')
-			ray->posY += ray->dirY * moveSpeed;
+		if (ray->map_data
+			[(int)(ray->posY)][(int)(ray->posX + ray->dirX * movespeed)] != '1')
+			ray->posX += ray->dirX * movespeed;
+		if (ray->map_data
+			[(int)(ray->posY + ray->dirY * movespeed)][(int)(ray->posX)] != '1')
+			ray->posY += ray->dirY * movespeed;
 	}
-	// 뒤로 이동
-	else if (keycode == 3748 || keycode == 125 || keycode == 115) // S 키 또는 아래쪽 화살표
+	else if (keycode == 3748 || keycode == 125 || keycode == 115)
 	{
-		if (ray->map_data[(int)(ray->posY)][(int)(ray->posX - ray->dirX * moveSpeed)] != '1')
-			ray->posX -= ray->dirX * moveSpeed;
-		if (ray->map_data[(int)(ray->posY - ray->dirY * moveSpeed)][(int)(ray->posX)] != '1')
-			ray->posY -= ray->dirY * moveSpeed;
+		if (ray->map_data
+			[(int)(ray->posY)][(int)(ray->posX - ray->dirX * movespeed)] != '1')
+			ray->posX -= ray->dirX * movespeed;
+		if (ray->map_data
+			[(int)(ray->posY - ray->dirY * movespeed)][(int)(ray->posX)] != '1')
+			ray->posY -= ray->dirY * movespeed;
 	}
-	// 왼쪽으로 회전
-	else if (keycode == 3761 || keycode == 123 || keycode == 97) // A 키 또는 왼쪽 화살표
+	else if (keycode == 3761 || keycode == 123 || keycode == 97)
 	{
-		double oldDirX = ray->dirX;
-		ray->dirX = ray->dirX * cos(-rotSpeed) - ray->dirY * sin(-rotSpeed);
-		ray->dirY = oldDirX * sin(-rotSpeed) + ray->dirY * cos(-rotSpeed);
-		double oldPlaneX = ray->planeX;
-		ray->planeX = ray->planeX * cos(-rotSpeed) - ray->planeY * sin(-rotSpeed);
-		ray->planeY = oldPlaneX * sin(-rotSpeed) + ray->planeY * cos(-rotSpeed);
+		olddirx = ray->dirX;
+		oldplanex = ray->planeX;
+		ray->dirX = ray->dirX * cos(-rotspeed) - ray->dirY * sin(-rotspeed);
+		ray->dirY = olddirx * sin(-rotspeed) + ray->dirY * cos(-rotspeed);
+		ray->planeX
+			= ray->planeX * cos(-rotspeed) - ray->planeY * sin(-rotspeed);
+		ray->planeY = oldplanex * sin(-rotspeed) + ray->planeY * cos(-rotspeed);
 	}
-	// 오른쪽으로 회전
-	else if (keycode == 3767 || keycode == 124 || keycode == 100) // D 키 또는 오른쪽 화살표
+	else if (keycode == 3767 || keycode == 124 || keycode == 100)
 	{
-		double oldDirX = ray->dirX;
-		ray->dirX = ray->dirX * cos(rotSpeed) - ray->dirY * sin(rotSpeed);
-		ray->dirY = oldDirX * sin(rotSpeed) + ray->dirY * cos(rotSpeed);
-		double oldPlaneX = ray->planeX;
-		ray->planeX = ray->planeX * cos(rotSpeed) - ray->planeY * sin(rotSpeed);
-		ray->planeY = oldPlaneX * sin(rotSpeed) + ray->planeY * cos(rotSpeed);
+		olddirx = ray->dirX;
+		oldplanex = ray->planeX;
+		ray->dirX = ray->dirX * cos(rotspeed) - ray->dirY * sin(rotspeed);
+		ray->dirY = olddirx * sin(rotspeed) + ray->dirY * cos(rotspeed);
+		ray->planeX = ray->planeX * cos(rotspeed) - ray->planeY * sin(rotspeed);
+		ray->planeY = oldplanex * sin(rotspeed) + ray->planeY * cos(rotspeed);
 	}
-	
-	// 화면 다시 그리기
 	raycast(total);
 	return (0);
 }
 
 // 창 닫기 이벤트 처리 함수
-int     close_window(t_total *total)
+int	close_window(t_total *total)
 {
-	// mlx_destroy_window(total->mlx->mlx_ptr, total->mlx->win_ptr);
-	// print_mem_status(total); // 디버깅용, 정리 전 메모리 상태 출력
-	// free_all_memory(total);
-	// free(total->mem_tracker);
-	// free(total);
-	// exit(0);
 	mlx_loop_end(total->mlx->mlx_ptr);
 	return (0);
 }
 
 // 플레이어 위치 및 방향 초기화
-void    init_player(t_ray *ray)
+void	init_player(t_ray *ray)
 {
-	// 맵에서 플레이어 위치 찾기 ('N', 'S', 'E', 'W')
-	int y = 0;
-	int x;
-	char player_char = '\0';
+	int		y;
+	int		x;
+	char	player_char;
 
+	y = 0;
+	player_char = '\0';
 	while (y < ray->map_height)
 	{
 		x = 0;
@@ -97,16 +95,14 @@ void    init_player(t_ray *ray)
 				player_char = ray->map_data[y][x];
 				ray->posX = x + 0.5;
 				ray->posY = y + 0.5;
-				break;
+				break ;
 			}
 			x++;
 		}
 		if (player_char)
-			break;
+			break ;
 		y++;
 	}
-	
-	// 방향 벡터 초기화
 	if (player_char == 'N')
 	{
 		ray->dirX = 0;
@@ -137,7 +133,6 @@ void    init_player(t_ray *ray)
 	}
 	else
 	{
-		// 기본값 설정
 		ray->posX = 2;
 		ray->posY = 2;
 		ray->dirX = -1;
