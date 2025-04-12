@@ -76,10 +76,7 @@ static int	is_path(t_total *total)
 	if (fd_west != -1)
 		close(fd_west);
 	if (fd_north == -1 || fd_south == -1 || fd_east == -1 || fd_west == -1)
-	{
-		printf("invalid img path\n");
 		return (0);
-	}
 	else
 		return (1);
 }
@@ -95,18 +92,14 @@ int	is_xpm(t_total *total)
 		return (0);
 }
 
-// int	is_correct_count(t_total *total)
-// {
-// 	int	count;
-// 	int	i;
-
-// 	count = 0;
-// 	i = 0;
-// }
-
 int	validate(t_total *total)
 {
-	// if (is_closed(total) && is_path(total) && is_xpm(total) && is_correct_count(total))
+	if (!is_closed(total))
+		printf("not closed\n");
+	if (!is_path(total))
+		printf("not path\n");
+	if (!is_xpm(total))
+		printf("not xpm\n");
 	if (is_closed(total) && is_path(total) && is_xpm(total))
 		return (1);
 	else

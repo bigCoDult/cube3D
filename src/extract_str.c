@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 09:41:21 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/11 19:26:21 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/12 13:20:39 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ int	find_i_key(char *file, const char *key)
 		while (key[k] && key[k] == file[i + k])
 			k++;
 		if (key[k] == '\0')
-			return (i);
+		{
+			if (i == 0 || (is_whitespace(file[i - 1]) && file[i + k] == ' '))
+				return (i);
+		}
 		i++;
 	}
 	return (-1);
@@ -47,20 +50,17 @@ static char	*extract_value(const char *key, char *file)
 	int	i_key;
 	int	i_start;
 	int	i_end;
-
-	i_key = 0;
+	int i_dup;
+	
 	i_key = find_i_key(file, key);
-	if (\
-		i_key == -1 || \
-		(i_key != 0 && (!is_whitespace(file[i_key - 1]))) || \
-		!is_whitespace(file[i_key + ft_strlen(key)]))
-		{
-			printf("Error\nInvalid key\n");
-			return (NULL);
-		}
+	if (i_key == -1)
+		return (NULL);
 	i_start = i_key + ft_strlen(key);
+	i_dup = find_i_key(file + i_start, key);
+	if (i_dup != -1)
+		return (NULL);
 	if (count_space(file + i_key + ft_strlen(key)) == 0 || \
-		count_space(file + i_key + ft_strlen(key)) == -1)
+	count_space(file + i_key + ft_strlen(key)) == -1)
 		return (NULL);
 	i_start += count_space(file + i_key + ft_strlen(key));
 	i_end = i_start;
