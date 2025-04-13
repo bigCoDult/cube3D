@@ -1,153 +1,51 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/13 04:15:11 by yutsong           #+#    #+#             */
+/*   Updated: 2025/04/13 04:23:02 by yutsong          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
-/* 변수 초기화 함수
-// 맵 파싱 데이터를 활용한 플레이어 위치
-// 방향 벡터 초기화
-// 카메라 평면 초기화
-*/
 
-// int main()
-// {
-// 	// 맵 파싱
-// 	// 변수 초기화
-// 	// 화면 생성
-// 	/* 게임 루프(반복문)
-// 	// 프레임 그리기
-// 	// 키 입력 받기
-// 	*/
-// }
-
-
-void free_success_case(t_total *total)
+int	main(int argc, char **argv)
 {
-	mlx_destroy_image(total->mlx->mlx_ptr, total->ray->img);
-	mlx_destroy_image(total->mlx->mlx_ptr, total->ray->tex_imgs[0]);
-	mlx_destroy_image(total->mlx->mlx_ptr, total->ray->tex_imgs[1]);
-	mlx_destroy_image(total->mlx->mlx_ptr, total->ray->tex_imgs[2]);
-	mlx_destroy_image(total->mlx->mlx_ptr, total->ray->tex_imgs[3]);
-    
-	free(total->parsed->extracted_str->north);
-	free(total->parsed->extracted_str->south);
-	free(total->parsed->extracted_str->east);
-	free(total->parsed->extracted_str->west);
-	free(total->parsed->extracted_str->ceiling);
-	free(total->parsed->extracted_str->floor);
-	free(total->parsed->extracted_str);
-	
-	mlx_destroy_image(total->mlx->mlx_ptr, total->parsed->image_info->north);
-	mlx_destroy_image(total->mlx->mlx_ptr, total->parsed->image_info->south);
-	mlx_destroy_image(total->mlx->mlx_ptr, total->parsed->image_info->east);
-	mlx_destroy_image(total->mlx->mlx_ptr, total->parsed->image_info->west);
-	free(total->parsed->image_info->ceiling);
-	free(total->parsed->image_info->floor);
-	free(total->parsed->image_info);
-	
-	int col = 0;
-	while(total->parsed->map[col] != NULL)
-	{
-		free(total->parsed->map[col]);
-		col++;
-	}
-	free(total->parsed->map);
-	free(total->parsed->player);
-	free(total->parsed);
-	
-	mlx_destroy_window(total->mlx->mlx_ptr, total->mlx->win_ptr);
-	mlx_destroy_display(total->mlx->mlx_ptr);
-	free(total->mlx->mlx_ptr);
-	free(total->mlx);
-	
-	print_mem_status(total); // 디버깅용, 정리 전 메모리 상태 출력
-	free_all_memory(total); // 할당된 모든 메모리 해제
-	free(total->mem_tracker); // 메모리 추적기 자체 해제
-	free(total); // total 구조체 해제
-}
-
-void free_fail_case(t_total *total)
-{
-	
-	free(total->parsed->extracted_str->north);
-	free(total->parsed->extracted_str->south);
-	free(total->parsed->extracted_str->east);
-	free(total->parsed->extracted_str->west);
-	free(total->parsed->extracted_str->ceiling);
-	free(total->parsed->extracted_str->floor);
-	free(total->parsed->extracted_str);
-	
-	
-	int col = 0;
-	while(total->parsed->map[col] != NULL)
-	{
-		free(total->parsed->map[col]);
-		col++;
-	}
-	free(total->parsed->map);
-	free(total->parsed->player);
-	free(total->parsed);
-	
-	free_all_memory(total); // 할당된 모든 메모리 해제
-	free(total->mem_tracker); // 메모리 추적기 자체 해제
-	free(total); // total 구조체 해제
-}
-
-/*
-mlx 오류 해결
-	Syscall param writev(vector[0]) points to uninitialised byte(s)
-		int	mlx_int_anti_resize_win() 함수안에
-		memset(&hints, 0, sizeof(hints)); 추가
-*/
-int main(int argc, char **argv)
-{
-    t_total *total;
+	t_total	*total;
 	int		fd;
-	(void)argv;
 
+	(void)argv;
 	if (argc != 2)
 	{
 		ft_putstr_fd("Error\nUsage: ./cub3d [map_file.cub]\n", 2);
 		return (1);
 	}
-
-	// 맵파일 열기
 	fd = open("./img/map.cub", O_RDONLY);
 	if (fd == -1)
 	{
 		printf("file open error\n");
 		return (-1);
 	}
-
-	// t_total 메모리 할당
-    total = (t_total *)malloc(sizeof(t_total));
-
-	// 메모리 추적 초기화
+	total = (t_total *)malloc(sizeof(t_total));
 	init_mem_tracker(total);
-	
-	// 맵에서 str 추출
 	extract_str(fd, total);
-	
-	//str 검증
 	if (validate(total))
 	{
-		// MLX 초기화
 		init_about_mlx(total);
-		// valid 경로를 기반으로 mlx_ptr에 img 로드
 		extract_img(total);
-		// 레이캐스팅 설정 및 시작
 		start_raycast(total);
-		
-		// MLX 루프 실행
 		mlx_loop(total->mlx->mlx_ptr);
 	}
 	else
 	{
-		// extract_str()의 메모리만 정리
 		free_fail_case(total);
 		close(fd);
 		return (1);
 	}
-    
-    // mlx_loop_end()에서 이어지는 메모리 정리
 	free_success_case(total);
-	
 	close(fd);
-    return (0);
+	return (0);
 }
