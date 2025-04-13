@@ -6,7 +6,7 @@
 /*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 12:20:40 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/11 12:20:41 by yutsong          ###   ########.fr       */
+/*   Updated: 2025/04/13 05:03:34 by yutsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,68 +21,6 @@ void	init_mem_tracker(t_total *total)
 	total->mem_tracker->head = NULL;
 	total->mem_tracker->count = 0;
 	total->mem_tracker->total_size = 0;
-}
-
-// 메모리 할당 및 추적 함수
-void	*tracked_malloc(t_total *total, size_t size, char *label)
-{
-	void		*ptr;
-	t_mem_node	*new_node;
-
-	ptr = malloc(size);
-	if (!ptr)
-		return (NULL);
-	new_node = (t_mem_node *)malloc(sizeof(t_mem_node));
-	if (!new_node)
-	{
-		free(ptr);
-		return (NULL);
-	}
-	new_node->ptr = ptr;
-	new_node->size = size;
-	new_node->label = ft_strdup(label);
-	new_node->next = NULL;
-	if (!total->mem_tracker->head)
-		total->mem_tracker->head = new_node;
-	else
-	{
-		new_node->next = total->mem_tracker->head;
-		total->mem_tracker->head = new_node;
-	}
-	total->mem_tracker->count++;
-	total->mem_tracker->total_size += size;
-	return (ptr);
-}
-
-// 메모리 해제 함수
-void	tracked_free(t_total *total, void *ptr)
-{
-	t_mem_node	*current;
-	t_mem_node	*prev;
-
-	if (!ptr || !total->mem_tracker)
-		return ;
-	current = total->mem_tracker->head;
-	prev = NULL;
-	while (current)
-	{
-		if (current->ptr == ptr)
-		{
-			if (prev)
-				prev->next = current->next;
-			else
-				total->mem_tracker->head = current->next;
-			total->mem_tracker->count--;
-			total->mem_tracker->total_size -= current->size;
-			free(current->label);
-			free(ptr);
-			free(current);
-			return ;
-		}
-		prev = current;
-		current = current->next;
-	}
-	free(ptr);
 }
 
 // 할당된 메모리 상태 출력 (디버깅용)

@@ -26,12 +26,19 @@ SRC = \
 	$(SRC_DIR)/print_parsed.c \
 	$(SRC_DIR)/validate.c \
 	$(SRC_DIR)/raycast.c \
+	$(SRC_DIR)/raycast_wrap.c \
 	$(SRC_DIR)/raycast_cal.c \
 	$(SRC_DIR)/raycast_utils.c \
 	$(SRC_DIR)/render.c \
+	$(SRC_DIR)/render_draw.c \
 	$(SRC_DIR)/control.c \
+	$(SRC_DIR)/control_player.c \
+	$(SRC_DIR)/control_set.c \
 	$(SRC_DIR)/memory.c \
 	$(SRC_DIR)/free_both_case.c \
+	$(SRC_DIR)/memory_punish.c \
+	$(SRC_DIR)/memory_track.c \
+	$(SRC_DIR)/memory_free.c \
 	$(SRC_DIR)/main.c
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

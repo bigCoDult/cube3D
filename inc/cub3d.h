@@ -186,18 +186,41 @@ void	print_parsed(t_total *total);
 void    start_raycast(t_total *total);
 
 // control.c
-int		key_press(int keycode, t_total *total);
-int		close_window(t_total *total);
 void	init_player(t_ray *ray);
+void	set_player_direction(t_ray *ray, char player_char);
+
+// control_set.c
+void	set_north_direction(t_ray *ray);
+void	set_south_direction(t_ray *ray);
+void	set_east_direction(t_ray *ray);
+void	set_west_direction(t_ray *ray);
+void	set_default_player(t_ray *ray);
+
+// control_player.c
+void    move_forward(t_ray *ray, double movespeed);
+void    move_backward(t_ray *ray, double movespeed);
+void    rotate_left(t_ray *ray, double rotspeed);
+void    rotate_right(t_ray *ray, double rotspeed);
+int		key_press(int keycode, t_total *total);
 
 // render.c
-void	draw_wall(t_ray *ray, int x);
 void	init_image(t_total *total, t_ray *ray);
 void	load_textures(t_total *total, t_ray *ray);
+int		get_texture_index(t_ray *ray);
+
+// render_draw.c
+void	draw_ceiling(t_ray *ray, int x);
+void	draw_floor(t_ray *ray, int x);
+void	draw_wall_texture(t_ray *ray, int x, int tex_idx);
+void	draw_wall(t_ray *ray, int x);
 
 // raycast.c
 void	raycast(t_total *total);
 void	init_ray(t_total *total, t_ray *ray, int x);
+
+// raycast_wrap.c
+int		game_loop(t_total *total);
+int		close_window(t_total *total);
 
 // raycast_cal.c
 void	calculate_step(t_ray *ray);
@@ -211,8 +234,19 @@ void    dda(t_ray *ray);
 // memory.c
 void init_mem_tracker(t_total *total);
 void *tracked_malloc(t_total *total, size_t size, char *label);
-void tracked_free(t_total *total, void *ptr);
 void print_mem_status(t_total *total);
 void free_all_memory(t_total *total);
+
+// memory_punish.c
+void tracked_free(t_total *total, void *ptr);
+
+// memory_track.c
+void tracked_free(t_total *total, void *ptr);
+
+// memory_free.c
+void free_img(t_total *total);
+void free_wall(t_total *total);
+void free_success_case(t_total *total);
+void free_fail_case(t_total *total);
 
 #endif /* CUB3D_H */

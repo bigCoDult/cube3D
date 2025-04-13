@@ -6,7 +6,7 @@
 /*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 12:21:00 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/11 12:21:00 by yutsong          ###   ########.fr       */
+/*   Updated: 2025/04/13 04:57:13 by yutsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,6 @@ void	raycast(t_total *total)
 	}
 	mlx_put_image_to_window(
 		total->mlx->mlx_ptr, total->mlx->win_ptr, ray->img, 0, 0);
-}
-
-// 게임 루프 함수
-int	game_loop(t_total *total)
-{
-	raycast(total);
-	return (0);
 }
 
 // 레이캐스팅 시작 함수
