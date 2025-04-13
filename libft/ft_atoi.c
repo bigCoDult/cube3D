@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-int	is_space(char c)
+int	is_whitespace(char c)
 {
 	if (c == 32 || (c >= 9 && c <= 13))
 		return (1);
@@ -26,7 +26,7 @@ int	ft_atoi(char *str)
 	rest = 0;
 	sign = 1;
 	length = 0;
-	while (str[length] && is_space(str[length]))
+	while (str[length] && is_whitespace(str[length]))
 		length++;
 	if (str[length] == '-')
 	{

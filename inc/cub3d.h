@@ -126,6 +126,7 @@ typedef struct s_extracted_str
 	char *west;
 	char *ceiling; /* "숫자,숫자,숫자" 이 형태의 문자열*/
 	char *floor;
+	char *file;
 } t_extracted_str;
 
 typedef struct s_image_info
@@ -163,17 +164,25 @@ typedef struct s_total // minishell에서의 t_shell과 같음
 	// 필요한것 추가 바랍니다
 } t_total;
 
-// 추출
+// extract_x.c
 int		extract_str(int fd, t_total *total);
 void	extract_map(char *file, t_total *total);
 void	extract_img(t_total *total);
-// 검사
+int		find_i_key(char *file, const char *key);
+int		find_map_start(char *file, int i);
+
+// validate.c
 int		validate(t_total *total);
 int		ft_atohex(char *hex);
 int		is_map_part(char c);
 
-void	print_parsed(t_total *total);
+// free_both_case.c
+void	free_success_case(t_total *total);
+void	free_fail_case(t_total *total);
+
 int		init_about_mlx(t_total *total);
+void	print_parsed(t_total *total);
+
 void    start_raycast(t_total *total);
 
 // control.c

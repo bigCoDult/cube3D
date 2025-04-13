@@ -6,13 +6,13 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 09:33:50 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/09 09:40:29 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/13 12:46:26 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	find_map_start(char *file, int i)
+int	find_map_start(char *file, int i)
 {
 	while (file[i] != '\0')
 		i++;

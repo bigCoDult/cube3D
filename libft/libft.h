@@ -108,8 +108,9 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 char	*file_to_str(int fd);
-int		is_space(char c);
+int		is_whitespace(char c);
 char	*ft_strndup(const char *src, int n);
 char	*join_s(char *st_s, char *buf);
+int		ft_endwith(char *str, char *end);
 
 #endif /* LIBFT_H */
