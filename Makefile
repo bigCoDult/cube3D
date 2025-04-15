@@ -12,10 +12,8 @@ INC_DIR = ./inc
 
 LIBFT = $(LIBFT_DIR)/libft.a
 MLX = $(MLX_DIR)/libmlx_Linux.a
-# MLX = $(MLX_DIR)/libmlx_Darwin.a
 
 LDFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx -lX11 -lXext -lXrandr -lm
-# LDFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -I/opt/X11/include -L/opt/X11/lib -lmlx -lX11 -lXext -lXrandr -lm
 INC = -I$(MLX_DIR) -I$(LIBFT_DIR) -I$(INC_DIR)
 
 SRC = \
@@ -70,9 +68,6 @@ clean:
 fclean: clean
 	$(RM) $(NAME)
 	$(MAKE) -C $(LIBFT_DIR) fclean
-# mlx에 fclean이 없음
-# mlx.a를 여기서 어떻게 지우지?
-# 대충 땜빵 했는데 이게 맞나?
 	$(MAKE) -C $(MLX_DIR) clean
 	$(RM) libmlx.a libmlx_Linux.a
 
