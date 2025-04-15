@@ -6,13 +6,12 @@
 /*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 12:21:00 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/15 06:59:56 by yutsong          ###   ########.fr       */
+/*   Updated: 2025/04/15 07:37:16 by yutsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-// 더미 맵 생성
 void	create_dummy_map(t_total *total, t_ray *ray)
 {
 	int	col;
@@ -29,7 +28,6 @@ void	create_dummy_map(t_total *total, t_ray *ray)
 	ray->map_height = col;
 }
 
-// 광선 초기화
 void	init_ray(t_total *total, t_ray *ray, int x)
 {
 	(void)total;
@@ -50,7 +48,6 @@ void	init_ray(t_total *total, t_ray *ray, int x)
 	ray->hit = 0;
 }
 
-// 메인 레이캐스팅 함수
 void	raycast(t_total *total)
 {
 	int		width;
@@ -73,7 +70,6 @@ void	raycast(t_total *total)
 		total->mlx->mlx_ptr, total->mlx->win_ptr, ray->img, 0, 0);
 }
 
-// 레이캐스팅 시작 함수
 void	start_raycast(t_total *total)
 {
 	t_ray	*ray;
