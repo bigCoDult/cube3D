@@ -24,6 +24,7 @@ SRC = \
 	$(SRC_DIR)/validate.c \
 	$(SRC_DIR)/is_closed.c \
 	$(SRC_DIR)/is_no_trash.c \
+	$(SRC_DIR)/is_one_player.c \
 	$(SRC_DIR)/etc_free.c \
 	$(SRC_DIR)/raycast.c \
 	$(SRC_DIR)/raycast_wrap.c \
