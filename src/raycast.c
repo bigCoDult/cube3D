@@ -6,7 +6,7 @@
 /*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 12:21:00 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/13 04:57:13 by yutsong          ###   ########.fr       */
+/*   Updated: 2025/04/15 06:59:56 by yutsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,20 @@ void	create_dummy_map(t_total *total, t_ray *ray)
 void	init_ray(t_total *total, t_ray *ray, int x)
 {
 	(void)total;
-	ray->screenX = x;
-	ray->cameraX = 2 * ray->screenX / (double)ray->screenWidth - 1;
-	ray->rayDirX = ray->dirX + ray->planeX * ray->cameraX;
-	ray->rayDirY = ray->dirY + ray->planeY * ray->cameraX;
-	ray->mapX = (int)ray->posX;
-	ray->mapY = (int)ray->posY;
-	if (ray->rayDirX == 0)
-		ray->deltaDistX = 1e30;
+	ray->screenx = x;
+	ray->camerax = 2 * ray->screenx / (double)ray->screenwidth - 1;
+	ray->raydirx = ray->dirx + ray->planex * ray->camerax;
+	ray->raydiry = ray->diry + ray->planey * ray->camerax;
+	ray->mapx = (int)ray->posx;
+	ray->mapy = (int)ray->posy;
+	if (ray->raydirx == 0)
+		ray->deltadistx = 1e30;
 	else
-		ray->deltaDistX = fabs(1 / ray->rayDirX);
-	if (ray->rayDirY == 0)
-		ray->deltaDistY = 1e30;
+		ray->deltadistx = fabs(1 / ray->raydirx);
+	if (ray->raydiry == 0)
+		ray->deltadisty = 1e30;
 	else
-		ray->deltaDistY = fabs(1 / ray->rayDirY);
+		ray->deltadisty = fabs(1 / ray->raydiry);
 	ray->hit = 0;
 }
 
@@ -58,7 +58,7 @@ void	raycast(t_total *total)
 
 	ray = (t_ray *)total->ray;
 	width = 0;
-	while (width < ray->screenWidth)
+	while (width < ray->screenwidth)
 	{
 		init_ray(total, ray, width);
 		calculate_step(ray);

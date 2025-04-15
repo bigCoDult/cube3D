@@ -6,7 +6,7 @@
 /*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 12:20:32 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/13 04:56:08 by yutsong          ###   ########.fr       */
+/*   Updated: 2025/04/15 07:02:05 by yutsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ char	find_player_position(t_ray *ray)
 				ray->map_data[y][x] == 'E' || ray->map_data[y][x] == 'W')
 			{
 				player_char = ray->map_data[y][x];
-				ray->posX = x + 0.5;
-				ray->posY = y + 0.5;
+				ray->posx = x + 0.5;
+				ray->posy = y + 0.5;
 				return (player_char);
 			}
 			x++;
