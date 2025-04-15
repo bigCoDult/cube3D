@@ -113,6 +113,6 @@ char	*ft_strndup(const char *src, int n);
 char	*join_s(char *st_s, char *buf);
 int		ft_endwith(char *str, char *end);
 int		ft_strcmp(const char *s1, const char *s2);
-int		cmp_atoitoa(char *origin);
+int		is_int_str(char *origin);
 
 #endif /* LIBFT_H */

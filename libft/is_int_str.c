@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cmp_atoitoa.c                                      :+:      :+:    :+:   */
+/*   is_int_str.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:11:20 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/15 14:28:25 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/15 14:37:23 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_strcmp(const char *s1, const char *s2)
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-int	cmp_atoitoa(char *origin)
+int	is_int_str(char *origin)
 {
 	int		n;
 	char	*str;
