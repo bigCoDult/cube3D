@@ -34,6 +34,7 @@ SRC = \
 	$(SRC_DIR)/render_draw.c \
 	$(SRC_DIR)/control.c \
 	$(SRC_DIR)/control_player.c \
+	$(SRC_DIR)/control_keycode.c \
 	$(SRC_DIR)/control_set.c \
 	$(SRC_DIR)/memory.c \
 	$(SRC_DIR)/free_both_case.c \
