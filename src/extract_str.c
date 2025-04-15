@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 09:41:21 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/15 15:04:57 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/15 15:49:40 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static char	*extract_value(const char *key, char *file)
 	i_dup = find_i_key(file + i_start, key);
 	if (i_dup != -1)
 	{
-		write(2, "Error\n", 6);
+		write(2, "Error\nkeyvalue duplicated\n", 26);
 		return (NULL);
 	}
 	if (count_space(file + i_key + ft_strlen(key)) == 0 || \
