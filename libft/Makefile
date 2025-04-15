@@ -55,6 +55,7 @@ SRC = \
 	  ./template_literal.c \
 	  ./file_to_str.c \
 	  ./ft_endwith.c \
+	  ./cmp_atoitoa.c \
       
 OBJ = $(SRC:.c=.o)
 
