@@ -6,31 +6,11 @@
 /*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 04:40:10 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/15 07:35:46 by yutsong          ###   ########.fr       */
+/*   Updated: 2025/04/15 09:25:14 by yutsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
-
-void	move_forward(t_ray *ray, double movespeed)
-{
-	if (ray->map_data
-		[(int)(ray->posy)][(int)(ray->posx + ray->dirx * movespeed)] != '1')
-		ray->posx += ray->dirx * movespeed;
-	if (ray->map_data
-		[(int)(ray->posy + ray->diry * movespeed)][(int)(ray->posx)] != '1')
-		ray->posy += ray->diry * movespeed;
-}
-
-void	move_backward(t_ray *ray, double movespeed)
-{
-	if (ray->map_data
-		[(int)(ray->posy)][(int)(ray->posx - ray->dirx * movespeed)] != '1')
-		ray->posx -= ray->dirx * movespeed;
-	if (ray->map_data
-		[(int)(ray->posy - ray->diry * movespeed)][(int)(ray->posx)] != '1')
-		ray->posy -= ray->diry * movespeed;
-}
 
 void	rotate_left(t_ray *ray, double rotspeed)
 {
@@ -74,8 +54,12 @@ int	key_press(int keycode, t_total *total)
 	else if (keycode == 3748 || keycode == 125 || keycode == 115)
 		move_backward(ray, movespeed);
 	else if (keycode == 3761 || keycode == 123 || keycode == 97)
-		rotate_left(ray, rotspeed);
+		move_right(ray, movespeed);
 	else if (keycode == 3767 || keycode == 124 || keycode == 100)
+		move_left(ray, movespeed);
+	else if (keycode == 3763 || keycode == 113 || keycode == 65361)
+		rotate_left(ray, rotspeed);
+	else if (keycode == 3764 || keycode == 101 || keycode == 65363)
 		rotate_right(ray, rotspeed);
 	raycast(total);
 	return (0);

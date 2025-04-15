@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 06:53:22 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/15 18:33:13 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/15 18:38:46 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,11 @@ void	start_raycast(t_total *total);
 // control.c
 void	init_player(t_ray *ray);
 void	set_player_direction(t_ray *ray, char player_char);
+// control_keycode.c
+void	move_forward(t_ray *ray, double movespeed);
+void	move_backward(t_ray *ray, double movespeed);
+void	move_left(t_ray *ray, double movespeed);
+void	move_right(t_ray *ray, double movespeed);
 // control_set.c
 void	set_north_direction(t_ray *ray);
 void	set_south_direction(t_ray *ray);
@@ -180,8 +185,6 @@ void	set_east_direction(t_ray *ray);
 void	set_west_direction(t_ray *ray);
 void	set_default_player(t_ray *ray);
 // control_player.c
-void	move_forward(t_ray *ray, double movespeed);
-void	move_backward(t_ray *ray, double movespeed);
 void	rotate_left(t_ray *ray, double rotspeed);
 void	rotate_right(t_ray *ray, double rotspeed);
 int		key_press(int keycode, t_total *total);
