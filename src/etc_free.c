@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:05:06 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/15 15:05:17 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/15 15:08:32 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	free_this_failed(t_total *total)
 	return (1);
 }
 
-static int	if_failed_free(t_total *total)
+int	if_failed_free(t_total *total)
 {
 	t_extracted_str	*extracted_str;
 

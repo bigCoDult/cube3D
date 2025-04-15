@@ -177,6 +177,7 @@ int		ft_atohex(char *hex);
 int		is_map_part(char c);
 int		is_closed(t_total *total);
 int		is_no_trash(t_total *total);
+int		if_failed_free(t_total *total);
 
 // free_both_case.c
 void	free_success_case(t_total *total);
