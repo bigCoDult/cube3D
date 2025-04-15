@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 04:15:11 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/15 15:51:55 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/15 18:03:53 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,28 @@ static int	validate_and_execute(t_total *total, int fd)
 	}
 }
 
+static int	is_valid_arg(int argc, char **argv)
+{
+	if (argc != 2)
+	{
+		write(2, "Error\ninvalid argc\n", 19);
+		return (0);
+	}
+	if (ft_endwith(argv[1], ".cub") == 0)
+	{
+		write(2, "Error\ninvalid map file\n", 23);
+		return (0);
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_total	*total;
 	int		fd;
 
-	(void)argv;
-	if (argc != 2)
-	{
-		write(2, "Error\ninvalid argc\n", 19);
+	if (!is_valid_arg(argc, argv))
 		return (1);
-	}
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 	{
