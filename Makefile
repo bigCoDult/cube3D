@@ -25,6 +25,8 @@ SRC = \
 	$(SRC_DIR)/init_about_mlx.c \
 	$(SRC_DIR)/print_parsed.c \
 	$(SRC_DIR)/validate.c \
+	$(SRC_DIR)/is_closed.c \
+	$(SRC_DIR)/is_no_trash.c \
 	$(SRC_DIR)/raycast.c \
 	$(SRC_DIR)/raycast_wrap.c \
 	$(SRC_DIR)/raycast_cal.c \

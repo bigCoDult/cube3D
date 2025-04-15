@@ -164,17 +164,19 @@ typedef struct s_total // minishell에서의 t_shell과 같음
 	// 필요한것 추가 바랍니다
 } t_total;
 
-// extract_x.c
+// extract
 int		extract_str(int fd, t_total *total);
 void	extract_map(char *file, t_total *total);
 void	extract_img(t_total *total);
 int		find_i_key(char *file, const char *key);
 int		find_map_start(char *file, int i);
 
-// validate.c
+// validate
 int		validate(t_total *total);
 int		ft_atohex(char *hex);
 int		is_map_part(char c);
+int		is_closed(t_total *total);
+int		is_no_trash(t_total *total);
 
 // free_both_case.c
 void	free_success_case(t_total *total);
