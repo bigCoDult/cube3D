@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 14:11:35 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/15 17:53:34 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/15 18:34:15 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ int	is_color(t_total *total)
 	int		result;
 	int		i;
 
+	if (count_comma(total->parsed->extracted_str->ceiling) != 2 || \
+	count_comma(total->parsed->extracted_str->floor) != 2)
+		return (0);
 	ceiling = ft_split(total->parsed->extracted_str->ceiling, ',');
 	floor = ft_split(total->parsed->extracted_str->floor, ',');
 	if (ceiling == NULL || floor == NULL)

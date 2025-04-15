@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:05:06 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/15 15:11:52 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/15 18:35:13 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,20 @@ int	if_failed_free(t_total *total)
 		return (1);
 	}
 	return (0);
+}
+
+int	count_comma(char *str)
+{
+	int	i;
+	int	count;
+
+	i = 0;
+	count = 0;
+	while (str[i])
+	{
+		if (str[i] == ',')
+			count++;
+		i++;
+	}
+	return (count);
 }

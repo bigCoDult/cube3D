@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 06:53:22 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/15 16:42:56 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/15 18:33:13 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,9 @@ int		is_closed(t_total *total);
 int		is_no_trash(t_total *total);
 int		if_failed_free(t_total *total);
 int		is_one_player(t_total *total);
+int		count_comma(char *str);
+
+
 // free_both_case.c
 void	free_success_case(t_total *total);
 void	free_fail_case(t_total *total);
