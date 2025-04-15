@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_both_case.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 20:10:42 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/09 20:31:21 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/15 07:03:44 by yutsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void	free_success_case(t_total *total)
 	free(total->parsed);
 	free(total->mlx->mlx_ptr);
 	free(total->mlx);
-	print_mem_status(total);
 	free_all_memory(total);
 	free(total->mem_tracker);
 	free(total);

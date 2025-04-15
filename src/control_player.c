@@ -6,7 +6,7 @@
 /*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 04:40:10 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/13 04:43:28 by yutsong          ###   ########.fr       */
+/*   Updated: 2025/04/15 07:02:26 by yutsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@
 void	move_forward(t_ray *ray, double movespeed)
 {
 	if (ray->map_data
-		[(int)(ray->posY)][(int)(ray->posX + ray->dirX * movespeed)] != '1')
-		ray->posX += ray->dirX * movespeed;
+		[(int)(ray->posy)][(int)(ray->posx + ray->dirx * movespeed)] != '1')
+		ray->posx += ray->dirx * movespeed;
 	if (ray->map_data
-		[(int)(ray->posY + ray->dirY * movespeed)][(int)(ray->posX)] != '1')
-		ray->posY += ray->dirY * movespeed;
+		[(int)(ray->posy + ray->diry * movespeed)][(int)(ray->posx)] != '1')
+		ray->posy += ray->diry * movespeed;
 }
 
 // 뒤로 이동하는 함수
 void	move_backward(t_ray *ray, double movespeed)
 {
 	if (ray->map_data
-		[(int)(ray->posY)][(int)(ray->posX - ray->dirX * movespeed)] != '1')
-		ray->posX -= ray->dirX * movespeed;
+		[(int)(ray->posy)][(int)(ray->posx - ray->dirx * movespeed)] != '1')
+		ray->posx -= ray->dirx * movespeed;
 	if (ray->map_data
-		[(int)(ray->posY - ray->dirY * movespeed)][(int)(ray->posX)] != '1')
-		ray->posY -= ray->dirY * movespeed;
+		[(int)(ray->posy - ray->diry * movespeed)][(int)(ray->posx)] != '1')
+		ray->posy -= ray->diry * movespeed;
 }
 
 // 좌측으로 회전하는 함수
@@ -40,12 +40,12 @@ void	rotate_left(t_ray *ray, double rotspeed)
 	double	olddirx;
 	double	oldplanex;
 
-	olddirx = ray->dirX;
-	oldplanex = ray->planeX;
-	ray->dirX = ray->dirX * cos(-rotspeed) - ray->dirY * sin(-rotspeed);
-	ray->dirY = olddirx * sin(-rotspeed) + ray->dirY * cos(-rotspeed);
-	ray->planeX = ray->planeX * cos(-rotspeed) - ray->planeY * sin(-rotspeed);
-	ray->planeY = oldplanex * sin(-rotspeed) + ray->planeY * cos(-rotspeed);
+	olddirx = ray->dirx;
+	oldplanex = ray->planex;
+	ray->dirx = ray->dirx * cos(-rotspeed) - ray->diry * sin(-rotspeed);
+	ray->diry = olddirx * sin(-rotspeed) + ray->diry * cos(-rotspeed);
+	ray->planex = ray->planex * cos(-rotspeed) - ray->planey * sin(-rotspeed);
+	ray->planey = oldplanex * sin(-rotspeed) + ray->planey * cos(-rotspeed);
 }
 
 // 우측으로 회전하는 함수
@@ -54,12 +54,12 @@ void	rotate_right(t_ray *ray, double rotspeed)
 	double	olddirx;
 	double	oldplanex;
 
-	olddirx = ray->dirX;
-	oldplanex = ray->planeX;
-	ray->dirX = ray->dirX * cos(rotspeed) - ray->dirY * sin(rotspeed);
-	ray->dirY = olddirx * sin(rotspeed) + ray->dirY * cos(rotspeed);
-	ray->planeX = ray->planeX * cos(rotspeed) - ray->planeY * sin(rotspeed);
-	ray->planeY = oldplanex * sin(rotspeed) + ray->planeY * cos(rotspeed);
+	olddirx = ray->dirx;
+	oldplanex = ray->planex;
+	ray->dirx = ray->dirx * cos(rotspeed) - ray->diry * sin(rotspeed);
+	ray->diry = olddirx * sin(rotspeed) + ray->diry * cos(rotspeed);
+	ray->planex = ray->planex * cos(rotspeed) - ray->planey * sin(rotspeed);
+	ray->planey = oldplanex * sin(rotspeed) + ray->planey * cos(rotspeed);
 }
 
 // 키 이벤트 처리 함수

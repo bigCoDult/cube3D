@@ -6,7 +6,7 @@
 /*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 04:12:51 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/13 04:13:11 by yutsong          ###   ########.fr       */
+/*   Updated: 2025/04/15 07:01:43 by yutsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@ void	draw_ceiling(t_ray *ray, int x)
 	int	y;
 
 	y = 0;
-	while (y < ray->drawStart)
+	while (y < ray->drawstart)
 	{
-		ray->data[y * ray->screenWidth + x] = ray->ceiling_color;
+		ray->data[y * ray->screenwidth + x] = ray->ceiling_color;
 		y++;
 	}
 }
@@ -30,10 +30,10 @@ void	draw_floor(t_ray *ray, int x)
 {
 	int	y;
 
-	y = ray->drawEnd;
-	while (y < ray->screenHeight)
+	y = ray->drawend;
+	while (y < ray->screenheight)
 	{
-		ray->data[y * ray->screenWidth + x] = ray->floor_color;
+		ray->data[y * ray->screenwidth + x] = ray->floor_color;
 		y++;
 	}
 }
@@ -46,14 +46,14 @@ void	draw_wall_texture(t_ray *ray, int x, int tex_idx)
 	int	tex_x;
 	int	tex_y;
 
-	y = ray->drawStart;
-	while (y < ray->drawEnd)
+	y = ray->drawstart;
+	while (y < ray->drawend)
 	{
-		tex_y = (int)ray->texPos & (ray->tex_height - 1);
-		ray->texPos += ray->step;
-		tex_x = ray->texX;
+		tex_y = (int)ray->texpos & (ray->tex_height - 1);
+		ray->texpos += ray->step;
+		tex_x = ray->texx;
 		color = ray->textures[tex_idx][tex_y * ray->tex_width + tex_x];
-		ray->data[y * ray->screenWidth + x] = color;
+		ray->data[y * ray->screenwidth + x] = color;
 		y++;
 	}
 }
