@@ -6,13 +6,12 @@
 /*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 04:12:51 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/15 07:01:43 by yutsong          ###   ########.fr       */
+/*   Updated: 2025/04/15 07:37:27 by yutsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-// 천장 그리기 함수
 void	draw_ceiling(t_ray *ray, int x)
 {
 	int	y;
@@ -25,7 +24,6 @@ void	draw_ceiling(t_ray *ray, int x)
 	}
 }
 
-// 바닥 그리기 함수
 void	draw_floor(t_ray *ray, int x)
 {
 	int	y;
@@ -38,7 +36,6 @@ void	draw_floor(t_ray *ray, int x)
 	}
 }
 
-// 벽 텍스처 그리기 함수
 void	draw_wall_texture(t_ray *ray, int x, int tex_idx)
 {
 	int	y;
@@ -58,7 +55,6 @@ void	draw_wall_texture(t_ray *ray, int x, int tex_idx)
 	}
 }
 
-// 메인 벽 그리기 함수
 void	draw_wall(t_ray *ray, int x)
 {
 	int	tex_idx;

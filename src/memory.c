@@ -6,13 +6,12 @@
 /*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 12:20:40 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/15 07:04:39 by yutsong          ###   ########.fr       */
+/*   Updated: 2025/04/15 07:36:52 by yutsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-// 메모리 추적 초기화
 void	init_mem_tracker(t_total *total)
 {
 	total->mem_tracker = (t_mem_tracker *)malloc(sizeof(t_mem_tracker));
@@ -23,7 +22,6 @@ void	init_mem_tracker(t_total *total)
 	total->mem_tracker->total_size = 0;
 }
 
-// 모든 할당된 메모리 해제
 void	free_all_memory(t_total *total)
 {
 	t_mem_node	*current;

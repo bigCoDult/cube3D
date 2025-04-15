@@ -6,7 +6,7 @@
 /*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 06:53:22 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/15 07:03:59 by yutsong          ###   ########.fr       */
+/*   Updated: 2025/04/15 07:37:43 by yutsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@
 # include <stdlib.h>
 # include <math.h>
 
-// 할당된 메모리의 주소가 기록된 구조체
 typedef struct s_mem_node
 {
 	void				*ptr;
@@ -43,71 +42,46 @@ typedef struct s_mem_tracker
 
 typedef struct s_ray
 {
-	// 플레이어 위치 좌표
 	double	posx;
 	double	posy;
-	// 맵 상 좌표
 	int		mapx;
 	int		mapy;
-	// 플레이어의 방향 벡터
 	double	dirx;
 	double	diry;
-	// 광선 방향 벡터 : 광선이 바라보는 방향
 	double	raydirx;
 	double	raydiry;
-	// 카메라 평면 벡터 : 플레이어 시야폭
 	double	planex;
 	double	planey;
-	// 카메라 x좌표 : 정규화된, 화면x좌표
 	double	camerax;
-	// 현재 위치로부터 다음 X면 혹은 Y면까지의 광선의 길이
 	double	sidedistx;
 	double	sidedisty;
-	// 어느 한 X면 혹은 Y면으로부터 다음 X 혹은 Y면까지의 광선의 길이
 	double	deltadistx;
 	double	deltadisty;
-	// 카메라 평면까지의 수직거리
 	double	perpwalldist;
-	// X 혹은 Y 방향으로의 진행
 	int		stepx;
 	int		stepy;
-	// 벽 도달 여부
 	int		hit;
-	// X축 벽인지 Y축 벽인지 여부
 	int		side;
-	// 스크린 가로 크기
 	int		screenwidth;
 	int		screenheight;
-	// 스크린 가로상 위치
 	int		screenx;
-	// 벽 그리기 시작과 끝 지점
 	int		drawstart;
 	int		drawend;
-	// 벽 높이
 	int		lineheight;
-	// 텍스처 정보
-	// 벽 방향 0:북 1:남 2:서 3:동
 	int		texnum;
-	// 충돌지점
 	double	wallx;
-	// 텍스처 내부 좌표
 	int		texx;
 	int		texy;
-	// 텍스처 매핑 비율
 	double	step;
-	// 텍스처 매핑 위치
 	double	texpos;
-	// 이미지 정보
 	void	*img;
 	int		*data;
 	int		bpp;
 	int		size_line;
 	int		endian;
-	// 맵 데이터
 	char	**map_data;
 	int		map_width;
 	int		map_height;
-	// 텍스처 관련 정보
 	void	**tex_imgs;
 	int		**textures;
 	int		tex_width;

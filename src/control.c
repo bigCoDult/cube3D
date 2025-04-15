@@ -6,13 +6,12 @@
 /*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 12:20:32 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/15 07:02:05 by yutsong          ###   ########.fr       */
+/*   Updated: 2025/04/15 07:36:19 by yutsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-// 플레이어 위치 찾기 함수
 char	find_player_position(t_ray *ray)
 {
 	int		y;
@@ -41,7 +40,6 @@ char	find_player_position(t_ray *ray)
 	return ('\0');
 }
 
-// 플레이어 방향 설정 함수
 void	set_player_direction(t_ray *ray, char player_char)
 {
 	if (player_char == 'N')
@@ -56,7 +54,6 @@ void	set_player_direction(t_ray *ray, char player_char)
 		set_default_player(ray);
 }
 
-// 플레이어 위치 및 방향 초기화 함수
 void	init_player(t_ray *ray)
 {
 	char	player_char;
