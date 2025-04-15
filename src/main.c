@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 04:15:11 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/15 15:17:43 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/15 15:51:55 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ int	main(int argc, char **argv)
 	(void)argv;
 	if (argc != 2)
 	{
-		write(2, "Error\n", 6);
+		write(2, "Error\ninvalid argc\n", 19);
 		return (1);
 	}
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 	{
-		write(2, "Error\n", 6);
+		write(2, "Error\nmap path invalid\n", 23);
 		return (1);
 	}
 	total = (t_total *)malloc(sizeof(t_total));

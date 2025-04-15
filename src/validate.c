@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 14:11:35 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/15 14:57:45 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/15 15:56:51 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,16 @@ int	validate(t_total *total)
 	else
 	{
 		write(2, "Error\n", 6);
+		if (!is_closed(total))
+			write(2, "map is not closed\n", 18);
+		if (!is_path(total))
+			write(2, "path is invalid\n", 16);
+		if (!is_xpm(total))
+			write(2, "file is not xpm\n", 16);
+		if (!is_no_trash(total))
+			write(2, "trash in map\n", 13);
+		if (!is_color(total))
+			write(2, "color value invalid\n", 20);
 		return (0);
 	}
 }
