@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 09:33:50 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/13 12:46:26 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/15 17:41:17 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,14 @@ int	find_map_start(char *file, int i)
 		i++;
 	i--;
 	while (i > 0 && is_map_part(file[i]))
+	{
+		if (file[i] == '\n' && file[i - 1] == '\n')
+			return (i);
 		i--;
-	while (file[i] != '\n')
+	}
+	while (file[i] != '\0' && file[i] != '\n')
 		i++;
-	while (file[i] == '\n')
+	while (file[i] != '\0' && file[i] == '\n')
 		i++;
 	return (i);
 }

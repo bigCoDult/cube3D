@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 09:41:21 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/15 15:49:40 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/15 17:45:56 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,25 +24,18 @@ static int	count_space(char *str)
 	return (i);
 }
 
-int	find_i_key(char *file, const char *key)
+static int	check_dup(char *file, int i_start, const char *key)
 {
-	int	i;
-	int	k;
+	int	i_dup;
 
-	i = 0;
-	while (file[i])
+	i_dup = find_i_key(file + i_start, key);
+	if (i_dup != -1)
 	{
-		k = 0;
-		while (key[k] && key[k] == file[i + k])
-			k++;
-		if (key[k] == '\0')
-		{
-			if (i == 0 || (is_whitespace(file[i - 1]) && file[i + k] == ' '))
-				return (i);
-		}
-		i++;
+		write(2, "Error\nkeyvalue duplicated\n", 26);
+		return (1);
 	}
-	return (-1);
+	else
+		return (0);
 }
 
 static char	*extract_value(const char *key, char *file)
@@ -50,14 +43,15 @@ static char	*extract_value(const char *key, char *file)
 	int	i_key;
 	int	i_start;
 	int	i_end;
-	int	i_dup;
 
 	i_key = find_i_key(file, key);
 	if (i_key == -1)
+	{
+		write(2, "Error\nkeyvalue not found\n", 26);
 		return (NULL);
+	}
 	i_start = i_key + ft_strlen(key);
-	i_dup = find_i_key(file + i_start, key);
-	if (i_dup != -1)
+	if (check_dup(file, i_start, key) == 1)
 	{
 		write(2, "Error\nkeyvalue duplicated\n", 26);
 		return (NULL);

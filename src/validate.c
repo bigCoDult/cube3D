@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 14:11:35 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/15 15:56:51 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/15 17:53:34 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	is_color(t_total *total)
 int	validate(t_total *total)
 {
 	if (is_closed(total) && is_path(total) && is_xpm(total) \
-	&& is_no_trash(total) && is_color(total))
+	&& is_no_trash(total) && is_color(total) && is_one_player(total))
 		return (1);
 	else
 	{
@@ -107,9 +107,11 @@ int	validate(t_total *total)
 		if (!is_xpm(total))
 			write(2, "file is not xpm\n", 16);
 		if (!is_no_trash(total))
-			write(2, "trash in map\n", 13);
+			write(2, "invalid map.cub\n", 16);
 		if (!is_color(total))
 			write(2, "color value invalid\n", 20);
+		if (!is_one_player(total))
+			write(2, "player is not 1\n", 17);
 		return (0);
 	}
 }

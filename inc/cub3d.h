@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
+/*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 06:53:22 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/15 07:37:43 by yutsong          ###   ########.fr       */
+/*   Updated: 2025/04/15 16:42:56 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-// # include <X11/X.h>
-// # include <X11/keysym.h>
 # include "../minilibx-linux/mlx.h"
 # include "../libft/libft.h"
 # include <stdio.h>
@@ -162,6 +160,7 @@ int		is_map_part(char c);
 int		is_closed(t_total *total);
 int		is_no_trash(t_total *total);
 int		if_failed_free(t_total *total);
+int		is_one_player(t_total *total);
 // free_both_case.c
 void	free_success_case(t_total *total);
 void	free_fail_case(t_total *total);

@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 09:32:34 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/09 09:32:59 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/15 17:46:06 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,4 +87,25 @@ void	extract_img(t_total *total)
 		mlx_ptr, total->parsed->extracted_str->west, &length.col, &length.row);
 	total->parsed->image_info->east = mlx_xpm_file_to_image(total->mlx->\
 		mlx_ptr, total->parsed->extracted_str->east, &length.col, &length.row);
+}
+
+int	find_i_key(char *file, const char *key)
+{
+	int	i;
+	int	k;
+
+	i = 0;
+	while (file[i])
+	{
+		k = 0;
+		while (key[k] && key[k] == file[i + k])
+			k++;
+		if (key[k] == '\0')
+		{
+			if (i == 0 || (is_whitespace(file[i - 1]) && file[i + k] == ' '))
+				return (i);
+		}
+		i++;
+	}
+	return (-1);
 }
