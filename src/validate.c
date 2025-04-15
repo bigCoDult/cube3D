@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 14:11:35 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/13 14:26:55 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/15 14:53:47 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,13 @@ static int	check_8way(t_total *total, int col, int row)
 	return (1);
 }
 
+static int	is_inner_map(char c)
+{
+	if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}
+
 static int	is_closed(t_total *total)
 {
 	t_cordi	cordi;
@@ -53,11 +60,7 @@ static int	is_closed(t_total *total)
 			cordi.col++;
 			continue ;
 		}
-		if (total->parsed->map[cordi.col][cordi.row] == '0' || \
-			total->parsed->map[cordi.col][cordi.row] == 'N' \
-		|| total->parsed->map[cordi.col][cordi.row] == 'S' || \
-		total->parsed->map[cordi.col][cordi.row] == 'E' \
-		|| total->parsed->map[cordi.col][cordi.row] == 'W')
+		if (is_inner_map(total->parsed->map[cordi.col][cordi.row]))
 		{
 			if (!check_8way(total, cordi.col, cordi.row))
 				return (0);
@@ -165,9 +168,54 @@ int	is_no_trash(t_total *total)
 	return (1);
 }
 
+static int	is_color_range(char **color)
+{
+	int	i;
+
+	i = 0;
+	while (color[i])
+	{
+		if (!is_int_str(color[i]))
+			return (0);
+		if (ft_atoi(color[i]) < 0 || ft_atoi(color[i]) > 255)
+			return (0);
+		i++;
+	}
+	if (i != 3)
+		return (0);
+	return (1);
+}
+
+int	is_color(t_total *total)
+{
+	char	**ceiling;
+	char	**floor;
+	int		result;
+	int		i;
+
+	ceiling = ft_split(total->parsed->extracted_str->ceiling, ',');
+	floor = ft_split(total->parsed->extracted_str->floor, ',');
+	if (ceiling == NULL || floor == NULL)
+		return (0);
+	if (is_color_range(ceiling) && is_color_range(floor))
+		result = 1;
+	else
+		result = 0;
+	i = 0;
+	while (ceiling[i])
+		free(ceiling[i++]);
+	i = 0;
+	while (floor[i])
+		free(floor[i++]);
+	free(ceiling);
+	free(floor);
+	return (result);
+}
+
 int	validate(t_total *total)
 {
-	if (is_closed(total) && is_path(total) && is_xpm(total) && is_no_trash(total))
+	if (is_closed(total) && is_path(total) && is_xpm(total) \
+	&& is_no_trash(total) && is_color(total))
 		return (1);
 	else
 	{
