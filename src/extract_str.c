@@ -6,7 +6,7 @@
 /*   By: sanbaek <sanbaek@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/09 09:41:21 by sanbaek           #+#    #+#             */
-/*   Updated: 2025/04/13 15:04:43 by sanbaek          ###   ########.fr       */
+/*   Updated: 2025/04/15 15:04:57 by sanbaek          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ static char	*extract_value(const char *key, char *file)
 	int	i_key;
 	int	i_start;
 	int	i_end;
-	int i_dup;
-	
+	int	i_dup;
+
 	i_key = find_i_key(file, key);
 	if (i_key == -1)
 		return (NULL);
@@ -72,35 +72,7 @@ static char	*extract_value(const char *key, char *file)
 	return (ft_strndup(file + i_start, i_end - i_start));
 }
 
-static int	if_failed_free(t_total *total)
-{
-	t_extracted_str	*extracted_str;
-	extracted_str = total->parsed->extracted_str;
-	if (!extracted_str->north || !extracted_str->south \
-		|| !extracted_str->west || !extracted_str->east \
-		|| !extracted_str->floor || !extracted_str->ceiling)
-	{
-		if (extracted_str->north)
-			free(extracted_str->north);
-		if (extracted_str->south)
-			free(extracted_str->south);
-		if (extracted_str->west)
-			free(extracted_str->west);
-		if (extracted_str->east)
-			free(extracted_str->east);
-		if (extracted_str->floor)
-			free(extracted_str->floor);
-		if (extracted_str->ceiling)
-			free(extracted_str->ceiling);
-		free(total->parsed->extracted_str->file);
-		free(total->parsed->extracted_str);
-		free(total->parsed->player);
-		free(total->parsed);
-		return (1);
-	}
-	return (0);
-}
-static void do_extract_nsew(char *file, t_total *total)
+static void	do_extract_nsew(char *file, t_total *total)
 {
 	total->parsed->extracted_str->north = extract_value("NO", file);
 	total->parsed->extracted_str->south = extract_value("SO", file);
@@ -126,9 +98,8 @@ int	extract_str(int fd, t_total *total)
 		return (-1);
 	}
 	do_extract_nsew(file, total);
-	if(if_failed_free(total))
+	if (if_failed_free(total))
 	{
-		// free_all_memory(total);
 		free(total->mem_tracker);
 		free(total);
 		return (-1);
