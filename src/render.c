@@ -6,7 +6,7 @@
 /*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 12:20:55 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/15 07:01:28 by yutsong          ###   ########.fr       */
+/*   Updated: 2025/04/15 07:37:33 by yutsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	init_image(t_total *total, t_ray *ray)
 			ray->img, &ray->bpp, &ray->size_line, &ray->endian);
 }
 
-// 텍스처 로드 함수
 void	load_textures(t_total *total, t_ray *ray)
 {
 	int	width;
@@ -52,7 +51,6 @@ void	load_textures(t_total *total, t_ray *ray)
 	ray->floor_color = ft_atohex(total->parsed->image_info->floor);
 }
 
-// 텍스처 인덱스 결정 함수
 int	get_texture_index(t_ray *ray)
 {
 	if (ray->side == 0 && ray->raydirx > 0)

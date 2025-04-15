@@ -6,13 +6,12 @@
 /*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/13 04:40:10 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/15 07:02:26 by yutsong          ###   ########.fr       */
+/*   Updated: 2025/04/15 07:35:46 by yutsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-// 앞으로 이동하는 함수
 void	move_forward(t_ray *ray, double movespeed)
 {
 	if (ray->map_data
@@ -23,7 +22,6 @@ void	move_forward(t_ray *ray, double movespeed)
 		ray->posy += ray->diry * movespeed;
 }
 
-// 뒤로 이동하는 함수
 void	move_backward(t_ray *ray, double movespeed)
 {
 	if (ray->map_data
@@ -34,7 +32,6 @@ void	move_backward(t_ray *ray, double movespeed)
 		ray->posy -= ray->diry * movespeed;
 }
 
-// 좌측으로 회전하는 함수
 void	rotate_left(t_ray *ray, double rotspeed)
 {
 	double	olddirx;
@@ -48,7 +45,6 @@ void	rotate_left(t_ray *ray, double rotspeed)
 	ray->planey = oldplanex * sin(-rotspeed) + ray->planey * cos(-rotspeed);
 }
 
-// 우측으로 회전하는 함수
 void	rotate_right(t_ray *ray, double rotspeed)
 {
 	double	olddirx;
@@ -62,7 +58,6 @@ void	rotate_right(t_ray *ray, double rotspeed)
 	ray->planey = oldplanex * sin(rotspeed) + ray->planey * cos(rotspeed);
 }
 
-// 키 이벤트 처리 함수
 int	key_press(int keycode, t_total *total)
 {
 	double	movespeed;

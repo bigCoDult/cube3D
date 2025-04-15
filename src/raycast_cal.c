@@ -6,13 +6,12 @@
 /*   By: yutsong <yutsong@student.42gyeongsan.kr    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/11 12:20:50 by yutsong           #+#    #+#             */
-/*   Updated: 2025/04/15 07:00:45 by yutsong          ###   ########.fr       */
+/*   Updated: 2025/04/15 07:37:02 by yutsong          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/cub3d.h"
 
-// 광선의 방향과 시작 지점에서의 사이드 거리 계산
 void	calculate_step(t_ray *ray)
 {
 	if (ray->raydirx < 0)
@@ -37,7 +36,6 @@ void	calculate_step(t_ray *ray)
 	}
 }
 
-// 거리계산
 void	cal_distance(t_ray *ray)
 {
 	if (ray->side == 0)
@@ -48,7 +46,6 @@ void	cal_distance(t_ray *ray)
 			= (ray->mapy - ray->posy + (1 - ray->stepy) / 2) / ray->raydiry;
 }
 
-// 벽 높이 및 텍스쳐 좌표 계산
 void	cal_wall_height(t_ray *ray)
 {
 	ray->lineheight = (int)(ray->screenheight / ray->perpwalldist);
@@ -60,7 +57,6 @@ void	cal_wall_height(t_ray *ray)
 		ray->drawend = ray->screenheight - 1;
 }
 
-// 벽 텍스처 계산 함수 추가
 void	cal_wall_texture(t_ray *ray)
 {
 	if (ray->side == 0)
